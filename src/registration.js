@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import axios from "axios";
 
-export default class Register extends React.Component {
+export default class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {};
@@ -16,7 +16,6 @@ export default class Register extends React.Component {
             })
             .then(({ data }) => {
                 if (data.sucess) {
-                    ///
                     location.replace("/");
                 } else {
                     this.setState({
@@ -38,24 +37,30 @@ export default class Register extends React.Component {
     }
     render() {
         return (
-            <div>
-                {this.state.error && <div className="error">Oops</div>}
+            <div id="form">
+                {this.state.error && (
+                    <div className="error">Something went wrong</div>
+                )}
                 <input
+                    type="text"
                     name="first"
                     placeholder="first name"
                     onChange={e => this.handleChange(e.target)}
                 />
                 <input
+                    type="text"
                     name="last"
                     placeholder="last name"
                     onChange={e => this.handleChange(e.target)}
                 />
                 <input
+                    type="email"
                     name="email"
                     placeholder="email"
                     onChange={e => this.handleChange(e.target)}
                 />
                 <input
+                    type="password"
                     name="password"
                     placeholder="password"
                     onChange={e => this.handleChange(e.target)}

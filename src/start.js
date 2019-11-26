@@ -6,7 +6,7 @@ import Welcome from "./welcome";
 let element = <Welcome />;
 
 if (location.pathname != "/welcome") {
-    element = <img src="logo.png" alt="Logo" />;
+    element = <img src="/images/logo.png" alt="Logo" />;
 }
 
 ReactDOM.render(element, document.querySelector("main"));
