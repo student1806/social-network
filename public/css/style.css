@@ -15,8 +15,15 @@ img {
 }
 
 #form {
+    border: 1px solid black;
+    border-radius: 15px;
+    justify-self: center;
+    align-self: center;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-self: center;
     align-items: center;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
 }

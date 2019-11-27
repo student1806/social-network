@@ -43,71 +43,37 @@ app.get("/welcome", function(req, res) {
     }
 });
 
-app.post("/login", (req, res) => {
-    let email = req.body.email;
-    let pw = req.body.password;
+app.post("/login", async (req, res) => {
+    const { email, password } = req.body;
 
-    db.getUser(email)
-        .then(({ rows }) => {
-            compare(pw, rows[0].password)
-                .then(val => {
-                    if (val) {
-                        req.session.userId = rows[0].id;
-                        console.log("success");
-                        console.log(req.session.userId);
-                        res.json({
-                            success: true
-                        });
-                    } else {
-                        res.json({
-                            success: false
-                        });
-                    }
-                })
-                .catch(err => {
-                    console.log("Comapare: ", err);
-                    res.json({
-                        success: false
-                    });
-                });
-        })
-        .catch(err => {
-            console.log("Error on the login page: ", err);
+    try {
+        let getHashed = await db.getUser(email);
+        let comaparePw = await compare(password, getHashed.rows[0].password);
+        if (comaparePw) {
+            req.session.userId = getHashed.rows[0].id;
+            console.log(req.session.userId);
             res.json({
-                success: false
+                success: true
             });
-        });
+        }
+    } catch (err) {
+        console.log("Error on the login route: ", err);
+    }
 });
 
-app.post("/register", (req, res) => {
-    let firstname = req.body.first;
-    let lastname = req.body.last;
-    let email = req.body.email;
-    let pw = req.body.password;
-    hash(pw)
-        .then(hashedpwd => {
-            db.addUser(firstname, lastname, email, hashedpwd)
-                .then(({ rows }) => {
-                    req.session.userId = rows[0].id;
-                    console.log("success");
-                    console.log(req.session.userId);
-                    res.json({
-                        success: true
-                    });
-                })
-                .catch(err => {
-                    console.log("Error on the registar POST", err);
-                    res.json({
-                        success: false
-                    });
-                });
-        })
-        .catch(err => {
-            console.log("Error on the hashedpwd method: ", err);
-            res.json({
-                success: false
-            });
+app.post("/registration", async (req, res) => {
+    const { first, last, email, password } = req.body;
+    try {
+        let hashedpwd = await hash(password);
+        let id = await db.addUser(first, last, email, hashedpwd);
+
+        req.session.userId = id;
+        res.json({
+            success: true
         });
+    } catch (err) {
+        console.log("error on the post registration: ", err);
+    }
 });
 
 app.get("*", function(req, res) {

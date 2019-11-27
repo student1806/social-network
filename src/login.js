@@ -14,6 +14,7 @@ export default class Login extends Component {
                 password: this.state.password
             })
             .then(({ data }) => {
+                console.log(data.success);
                 if (data.success) {
                     location.replace("/");
                 } else {

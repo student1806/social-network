@@ -9,7 +9,7 @@ export default class Registration extends Component {
     }
     submit() {
         axios
-            .post("/register", {
+            .post("/registration", {
                 email: this.state.email,
                 password: this.state.password,
                 first: this.state.first,
