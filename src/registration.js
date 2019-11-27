@@ -15,7 +15,7 @@ export default class Register extends Component {
                 last: this.state.last
             })
             .then(({ data }) => {
-                if (data.sucess) {
+                if (data.success) {
                     location.replace("/");
                 } else {
                     this.setState({

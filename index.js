@@ -51,7 +51,7 @@ app.post("/register", (req, res) => {
                     console.log("success");
                     console.log(req.session.userId);
                     res.json({
-                        succes: true
+                        success: true
                     });
                 })
                 .catch(err => {
