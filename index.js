@@ -56,10 +56,16 @@ app.post("/register", (req, res) => {
                 })
                 .catch(err => {
                     console.log("Error on the registar POST", err);
+                    res.json({
+                        success: false
+                    });
                 });
         })
         .catch(err => {
             console.log("Error on the hashedpwd method: ", err);
+            res.json({
+                success: false
+            });
         });
 });
 
