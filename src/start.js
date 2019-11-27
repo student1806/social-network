@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import Hello from "./hello";
 import Welcome from "./welcome";
 
-let element = <Welcome />;
+let element = ""; //<Welcome />;
 
-if (location.pathname != "/welcome") {
+// if welcome or login
+
+if (location.pathname == "/welcome") {
+    element = <Welcome />;
+} else {
+    //element = <Logo />;
     element = <img src="/images/logo.png" alt="Logo" />;
 }
 

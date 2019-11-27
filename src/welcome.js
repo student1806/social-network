@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import Register from "./registration";
+import Registration from "./registration";
+import Login from "./login";
+import { HashRouter, Route } from "react-router-dom";
 
 export default class Welcome extends Component {
     constructor(props) {
@@ -11,13 +13,15 @@ export default class Welcome extends Component {
             <div>
                 <h1> Welcome to my Social network Page </h1>
                 <img src="/images/logo.png" />
-                <p>Join the Social network below</p>
-                <Register />
-                <p>
-                    Already a have an account?{" "}
-                    <a href="javascript://">Log in</a>
-                </p>
+                <HashRouter>
+                    <div>
+                        <Route exact path="/" component={Registration} />
+                        <Route path="/login" component={Login} />
+                    </div>
+                </HashRouter>
             </div>
         );
     }
 }
+
+// replace divs with react.fragment

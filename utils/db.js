@@ -13,9 +13,7 @@ module.exports.addUser = function(firstname, lastname, email, password) {
 
 module.exports.getUser = function(email) {
     return db.query(
-        `SELECT users.id AS u_id, * FROM users
-        FULL OUTER JOIN signatures
-        ON users.id = signatures.users_id
+        `SELECT * FROM users
         WHERE email = $1`,
         [email]
     );

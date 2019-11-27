@@ -1,19 +1,17 @@
 import React, { Component } from "react";
-import axios from "./axios";
 import { Link } from "react-router-dom";
+import axios from "./axios";
 
-export default class Registration extends Component {
+export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
     submit() {
         axios
-            .post("/register", {
+            .post("/login", {
                 email: this.state.email,
-                password: this.state.password,
-                first: this.state.first,
-                last: this.state.last
+                password: this.state.password
             })
             .then(({ data }) => {
                 if (data.success) {
@@ -25,7 +23,7 @@ export default class Registration extends Component {
                 }
             })
             .catch(err => {
-                console.log("Error on the POST register page: ", err);
+                console.log("Error on the POST Log in page: ", err);
                 this.setState({
                     error: true
                 });
@@ -38,23 +36,11 @@ export default class Registration extends Component {
     }
     render() {
         return (
-            <div id="form">
+            <div>
+                <h3>Please log in below</h3>
                 {this.state.error && (
                     <div className="error">Something went wrong</div>
                 )}
-                <p>Join the Social network below</p>
-                <input
-                    type="text"
-                    name="first"
-                    placeholder="first name"
-                    onChange={e => this.handleChange(e.target)}
-                />
-                <input
-                    type="text"
-                    name="last"
-                    placeholder="last name"
-                    onChange={e => this.handleChange(e.target)}
-                />
                 <input
                     type="email"
                     name="email"
@@ -68,13 +54,8 @@ export default class Registration extends Component {
                     onChange={e => this.handleChange(e.target)}
                 />
                 <button onClick={e => this.submit()}>submit</button>
-                <p>
-                    Already a have an account? <Link to="/login">Log in</Link>
-                </p>
+                <Link to="/">Take me to registration</Link>
             </div>
         );
     }
 }
-
-// this page will looks similar to the petion where the coockie session get an obj from thj edata base querySelector//
-// the only difference is the res.jsson
