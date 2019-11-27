@@ -42,7 +42,7 @@ export default class Registration extends Component {
                 {this.state.error && (
                     <div className="error">Something went wrong</div>
                 )}
-                <p>Join the Social network below</p>
+                <h3>Join the Social network below</h3>
                 <input
                     type="text"
                     name="first"
@@ -67,7 +67,7 @@ export default class Registration extends Component {
                     placeholder="password"
                     onChange={e => this.handleChange(e.target)}
                 />
-                <button onClick={e => this.submit()}>submit</button>
+                <button onClick={() => this.submit()}>submit</button>
                 <p>
                     Already a have an account? <Link to="/login">Log in</Link>
                 </p>
@@ -75,6 +75,3 @@ export default class Registration extends Component {
         );
     }
 }
-
-// this page will looks similar to the petion where the coockie session get an obj from thj edata base querySelector//
-// the only difference is the res.jsson

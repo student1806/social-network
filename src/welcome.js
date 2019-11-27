@@ -10,7 +10,7 @@ export default class Welcome extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="regis-page">
                 <h1> Welcome to my Social network Page </h1>
                 <img src="/images/logo.png" />
                 <HashRouter>
@@ -23,5 +23,3 @@ export default class Welcome extends Component {
         );
     }
 }
-
-// replace divs with react.fragment

@@ -14,7 +14,6 @@ export default class Login extends Component {
                 password: this.state.password
             })
             .then(({ data }) => {
-                console.log(data.success);
                 if (data.success) {
                     location.replace("/");
                 } else {
@@ -37,7 +36,7 @@ export default class Login extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="login">
                 <h3>Please log in below</h3>
                 {this.state.error && (
                     <div className="error">Something went wrong</div>
@@ -54,7 +53,7 @@ export default class Login extends Component {
                     placeholder="password"
                     onChange={e => this.handleChange(e.target)}
                 />
-                <button onClick={e => this.submit()}>submit</button>
+                <button onClick={() => this.submit()}>submit</button>
                 <Link to="/">Take me to registration</Link>
             </div>
         );

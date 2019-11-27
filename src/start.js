@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
+import Header from "./header";
 
 let element = ""; //<Welcome />;
 
@@ -9,8 +10,8 @@ let element = ""; //<Welcome />;
 if (location.pathname == "/welcome") {
     element = <Welcome />;
 } else {
-    //element = <Logo />;
-    element = <img src="/images/logo.png" alt="Logo" />;
+    element = <Header />;
 }
 
+// element = <img className="logo" src="/images/logo.png" alt="Logo" />;
 ReactDOM.render(element, document.querySelector("main"));

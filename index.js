@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const db = require("./utils/db");
+const secret = require("./secrets");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const { hash, compare } = require("./utils/bc");
@@ -12,7 +13,7 @@ app.use(express.json());
 
 app.use(
     cookieSession({
-        secret: `I'm always angry.`,
+        secret: secret.cookieSecret,
         maxAge: 1000 * 60 * 60 * 24 * 14
     })
 );
@@ -55,9 +56,16 @@ app.post("/login", async (req, res) => {
             res.json({
                 success: true
             });
+        } else {
+            res.json({
+                success: false
+            });
         }
     } catch (err) {
         console.log("Error on the login route: ", err);
+        res.json({
+            success: false
+        });
     }
 });
 
@@ -73,6 +81,9 @@ app.post("/registration", async (req, res) => {
         });
     } catch (err) {
         console.log("error on the post registration: ", err);
+        res.json({
+            success: false
+        });
     }
 });
 
