@@ -16,7 +16,7 @@ export default class App extends Component {
         axios
             .get("/userinfo")
             .then(({ data }) => {
-                console.log(data);
+                console.log("Get data: ", data);
                 this.setState({
                     first: data.userInfo.firstname,
                     last: data.userInfo.lastname,

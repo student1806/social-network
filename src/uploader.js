@@ -10,13 +10,11 @@ export default class UpLoader extends React.Component {
     componentDidMount() {
         console.log("uploader mounted");
         console.log("this.props, ", this.props);
-        console.log("this is the url: ");
-        // this.props.upLoadImage();
     }
 
     handleChange(e) {
         let fd = new FormData();
-        console.log(e.files[0]);
+        console.log("e.target .....", e);
         fd.append("file", e.files[0]);
         axios
             .post("/upload", fd)
