@@ -1,17 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
-import Header from "./header";
+// import Header from "./header";
+import App from "./app";
 
-let element = ""; //<Welcome />;
-
-// if welcome or login
+let element = "";
 
 if (location.pathname == "/welcome") {
     element = <Welcome />;
 } else {
-    element = <Header />;
+    element = <App />;
 }
-
-// element = <img className="logo" src="/images/logo.png" alt="Logo" />;
 ReactDOM.render(element, document.querySelector("main"));

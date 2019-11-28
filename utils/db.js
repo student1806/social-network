@@ -18,3 +18,19 @@ module.exports.getUser = function(email) {
         [email]
     );
 };
+
+module.exports.getUserInfo = function(id) {
+    return db.query(
+        `SELECT firstname, lastname, email, url FROM users
+        WHERE id = $1`,
+        [id]
+    );
+};
+module.exports.updateImage = function(url, id) {
+    return db.query(
+        `UPDATE users SET url=$1
+        WHERE id=$2
+        RETURNING *`,
+        [url, id]
+    );
+};

@@ -1,4 +1,9 @@
 const express = require("express");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const path = require("path");
+const s3 = require("./s3");
+const { s3Url } = require("./config.json");
 const app = express();
 const compression = require("compression");
 const db = require("./utils/db");
@@ -10,6 +15,24 @@ const { hash, compare } = require("./utils/bc");
 app.use(express.static("./public"));
 app.use(compression());
 app.use(express.json());
+
+const diskStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function(req, file, callback) {
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    }
+});
+
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152
+    }
+});
 
 app.use(
     cookieSession({
@@ -44,6 +67,17 @@ app.get("/welcome", function(req, res) {
     }
 });
 
+app.get("/userinfo", async (req, res) => {
+    try {
+        let userInfo = await db.getUserInfo(req.session.userId);
+        res.json({
+            userInfo: userInfo.rows[0]
+        });
+    } catch (e) {
+        console.log("Error on the get user info: ", e);
+    }
+});
+
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
@@ -53,6 +87,7 @@ app.post("/login", async (req, res) => {
         if (comaparePw) {
             req.session.userId = getHashed.rows[0].id;
             console.log(req.session.userId);
+            console.log(req.session.user);
             res.json({
                 success: true
             });
@@ -85,6 +120,20 @@ app.post("/registration", async (req, res) => {
             success: false
         });
     }
+});
+
+app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
+    //const { title, description, username } = req.body;
+    const imageUrl = `${s3Url}${req.file.filename}`;
+    db.updateImage(imageUrl, req.session.userId)
+        .then(() => {
+            res.json({
+                image: imageUrl
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 app.get("*", function(req, res) {

@@ -8,7 +8,7 @@ export default class Header extends Component {
     render() {
         return (
             <header>
-                <img className="logo" src="/images/logo.png" alt="Logo" />
+                <img className="avatar" src="/images/logo.png" alt="Logo" />
             </header>
         );
     }

@@ -26,6 +26,20 @@ img {
     width: auto;
 }
 
+.avatar {
+    height: 100px;
+    width: auto;
+}
+
+.upload-image {
+    border: 1px solid black;
+    height: 200px;
+    width: 400px;
+    position: absolute;
+    top: 200px;
+    left: 40%;
+}
+
 .logo {
     height: 100px;
     width: auto;
