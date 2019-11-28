@@ -86,8 +86,6 @@ app.post("/login", async (req, res) => {
         let comaparePw = await compare(password, getHashed.rows[0].password);
         if (comaparePw) {
             req.session.userId = getHashed.rows[0].id;
-            console.log(req.session.userId);
-            console.log(req.session.user);
             res.json({
                 success: true
             });
@@ -122,18 +120,16 @@ app.post("/registration", async (req, res) => {
     }
 });
 
-app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
-    //const { title, description, username } = req.body;
+app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
     const imageUrl = `${s3Url}${req.file.filename}`;
-    db.updateImage(imageUrl, req.session.userId)
-        .then(() => {
-            res.json({
-                image: imageUrl
-            });
-        })
-        .catch(err => {
-            console.log(err);
+    try {
+        await db.updateImage(imageUrl, req.session.userId);
+        res.json({
+            image: imageUrl
         });
+    } catch (e) {
+        console.log("Error on the /upload route; ", e);
+    }
 });
 
 app.get("*", function(req, res) {

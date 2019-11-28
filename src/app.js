@@ -10,6 +10,7 @@ export default class App extends Component {
             uploaderIsVisible: false
         };
         this.toggleModal = this.toggleModal.bind(this);
+        this.upLoadImage = this.upLoadImage.bind(this);
     }
     componentDidMount() {
         axios
@@ -34,7 +35,10 @@ export default class App extends Component {
     }
     upLoadImage(image) {
         console.log("this is my image ", image);
-        //this.setState({ imgurl: image });
+        this.setState({
+            imgurl: image,
+            uploaderIsVisible: !this.state.uploaderIsVisible
+        });
     }
     render() {
         return (
