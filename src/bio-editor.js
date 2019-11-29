@@ -13,15 +13,44 @@ export class BioEditor extends React.Component {
     componentDidMount() {
         // change the state of the button depending on the information from the database
         //if else
-        console.log("prpros in the bio editor ", this.props);
+        console.log("propros in the bio editor ", this.props);
         if (!this.props.bio) {
             this.setState(
                 {
                     buttonText: "add your bio"
                 },
-                () => console.log("this sete  ", this.state)
+                () => console.log("this stae  ", this.state)
             );
         }
+    }
+
+    toggleModal() {
+        this.setState({
+            editingMode: !this.state.editingMode
+        });
+    }
+
+    handleChange(textAreaVal) {
+        this.setState({
+            bio: textAreaVal.value
+        });
+    }
+    clickHandler() {
+        console.log(this.state.bio);
+        let obj = { bioTex: this.state.bio };
+        axios
+            .post("/updatebio", obj)
+            .then(res => {
+                this.setState({
+                    bio: res.data.bio,
+                    editingMode: false
+                });
+                console.log(this.state.bio);
+                this.props.upDateBio(res.data.bio);
+            })
+            .catch(err => {
+                console.log("error on the update bio route: ", err);
+            });
     }
 
     render() {
@@ -29,15 +58,20 @@ export class BioEditor extends React.Component {
             return (
                 <div>
                     <h1>I am the editor mode</h1>
-                    <textarea defaultValue={this.props.bio} />
-                    <button>save</button>
+                    <textarea
+                        onChange={e => this.handleChange(e.target)}
+                        defaultValue={this.props.bio}
+                    />
+                    <button onClick={e => this.clickHandler(e)}>save</button>
                 </div>
             );
         } else {
             return (
                 <div>
-                    <h1>I am the bio editor</h1>
-                    <button>{this.state.buttonText}</button>
+                    <p>{this.props.bio}</p>
+                    <button onClick={() => this.toggleModal()}>
+                        {this.state.buttonText}
+                    </button>
                 </div>
             );
         }

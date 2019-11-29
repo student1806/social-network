@@ -21,7 +21,7 @@ module.exports.getUser = function(email) {
 
 module.exports.getUserInfo = function(id) {
     return db.query(
-        `SELECT firstname, lastname, email, url FROM users
+        `SELECT firstname, lastname, email, url, bio FROM users
         WHERE id = $1`,
         [id]
     );
@@ -32,5 +32,14 @@ module.exports.updateImage = function(url, id) {
         WHERE id=$2
         RETURNING *`,
         [url, id]
+    );
+};
+
+module.exports.updateBio = (bio, id) => {
+    return db.query(
+        `UPDATE users SET bio=$1
+        WHERE id=$2
+        RETURNING bio`,
+        [bio, id]
     );
 };

@@ -108,7 +108,7 @@ app.post("/registration", async (req, res) => {
         let hashedpwd = await hash(password);
         let id = await db.addUser(first, last, email, hashedpwd);
 
-        req.session.userId = id;
+        req.session.userId = id.rows[0].id;
         res.json({
             success: true
         });
@@ -129,6 +129,16 @@ app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
         });
     } catch (e) {
         console.log("Error on the /upload route; ", e);
+    }
+});
+
+app.post("/updatebio", async (req, res) => {
+    const { bioTex } = req.body;
+    try {
+        let updatedBio = await db.updateBio(bioTex, req.session.userId);
+        res.json({ bio: updatedBio.rows[0].bio });
+    } catch (err) {
+        console.log("Error on the update-bio route: ", err);
     }
 });
 

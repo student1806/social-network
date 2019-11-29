@@ -8,16 +8,17 @@ export function Profile(props) {
         <>
             <h1>I am the profile picture {props.firstname}</h1>
             <ProfilePic
-                firstname={props.first}
-                lastname={props.last}
+                firstname={props.firstname}
+                lastname={props.lastname}
                 imgurl={props.imgurl}
             />
 
             <BioEditor
-                firstname={props.first}
-                lastname={props.last}
+                firstname={props.firstname}
+                lastname={props.lastname}
                 imgurl={props.imgurl}
                 bio={props.bio}
+                upDateBio={props.upDateBio}
             />
         </>
     );

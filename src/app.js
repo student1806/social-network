@@ -12,15 +12,16 @@ export default class App extends Component {
         };
         this.toggleModal = this.toggleModal.bind(this);
         this.upLoadImage = this.upLoadImage.bind(this);
+        this.upDateBio = this.upDateBio.bind(this);
     }
     componentDidMount() {
         axios
             .get("/userinfo")
             .then(({ data }) => {
-                console.log("Get data: ", data);
+                console.log("data from app ", data);
                 this.setState({
-                    first: data.userInfo.firstname,
-                    last: data.userInfo.lastname,
+                    firstname: data.userInfo.firstname,
+                    lastname: data.userInfo.lastname,
                     imgurl: data.userInfo.url,
                     bio: data.userInfo.bio
                 });
@@ -36,37 +37,39 @@ export default class App extends Component {
         });
     }
     upLoadImage(image) {
-        console.log("this is my image ", image);
+        // console.log("this is my image ", image);
         this.setState({
             imgurl: image,
             uploaderIsVisible: !this.state.uploaderIsVisible
         });
     }
-    // upDateBio() {
-    //     change state here
-    // }
+    upDateBio(upDateBio) {
+        this.setState({ bio: upDateBio });
+    }
     render() {
         //renders the page only when the content is back
-        if (!this.state.first) {
-            return null;
-        }
+        // if (!this.state.first) {
+        //     return null;
+        // }
         return (
             <div>
                 <header>
                     <img className="logo" src="/images/logo.png" alt="Logo" />
                     <div onClick={this.toggleModal}>
                         <ProfilePic
-                            firstname={this.state.first}
-                            lastname={this.state.last}
+                            firstname={this.state.firstname}
+                            lastname={this.state.lastname}
                             imgurl={this.state.imgurl}
                         />
                     </div>
                 </header>
 
                 <Profile
-                    firstname={this.state.first}
-                    lastname={this.state.last}
+                    firstname={this.state.firstname}
+                    lastname={this.state.lastname}
                     imgurl={this.state.imgurl}
+                    bio={this.state.bio}
+                    upDateBio={this.upDateBio}
                 />
 
                 {this.state.uploaderIsVisible && (
@@ -76,5 +79,3 @@ export default class App extends Component {
         );
     }
 }
-
-// add a small profile pic the the Profile
