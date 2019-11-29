@@ -13,3 +13,6 @@ export default class Header extends Component {
         );
     }
 }
+
+// Move the profile pic to the header and pass a dinamict class props className
+//props.ProfilePicClass

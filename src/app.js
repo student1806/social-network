@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "./axios";
 import { ProfilePic } from "./profile-pic";
 import UpLoader from "./uploader";
+import { Profile } from "./profile";
 
 export default class App extends Component {
     constructor(props) {
@@ -20,7 +21,8 @@ export default class App extends Component {
                 this.setState({
                     first: data.userInfo.firstname,
                     last: data.userInfo.lastname,
-                    imgurl: data.userInfo.url
+                    imgurl: data.userInfo.url,
+                    bio: data.userInfo.bio
                 });
             })
             .catch(err => {
@@ -40,22 +42,39 @@ export default class App extends Component {
             uploaderIsVisible: !this.state.uploaderIsVisible
         });
     }
+    // upDateBio() {
+    //     change state here
+    // }
     render() {
+        //renders the page only when the content is back
+        if (!this.state.first) {
+            return null;
+        }
         return (
-            <header>
-                <img className="logo" src="/images/logo.png" alt="Logo" />
-                <div onClick={this.toggleModal}>
-                    <ProfilePic
-                        firstname={this.state.first}
-                        lastname={this.state.last}
-                        imgurl={this.state.imgurl}
-                    />
-                </div>
+            <div>
+                <header>
+                    <img className="logo" src="/images/logo.png" alt="Logo" />
+                    <div onClick={this.toggleModal}>
+                        <ProfilePic
+                            firstname={this.state.first}
+                            lastname={this.state.last}
+                            imgurl={this.state.imgurl}
+                        />
+                    </div>
+                </header>
+
+                <Profile
+                    firstname={this.state.first}
+                    lastname={this.state.last}
+                    imgurl={this.state.imgurl}
+                />
 
                 {this.state.uploaderIsVisible && (
                     <UpLoader upLoadImage={this.upLoadImage} />
                 )}
-            </header>
+            </div>
         );
     }
 }
+
+// add a small profile pic the the Profile
