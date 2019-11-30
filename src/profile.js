@@ -3,7 +3,6 @@ import { ProfilePic } from "./profile-pic";
 import { BioEditor } from "./bio-editor";
 
 export function Profile(props) {
-    // console.log("props in profile ", props);
     return (
         <>
             <h1>I am the profile picture {props.firstname}</h1>
@@ -23,7 +22,3 @@ export function Profile(props) {
         </>
     );
 }
-// needs the uploader
-// add a ProfilePicClass
-
-// pass props to the BioEditor

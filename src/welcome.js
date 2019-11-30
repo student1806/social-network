@@ -14,7 +14,7 @@ export default class Welcome extends Component {
                 <h1> Welcome to my Social network Page </h1>
                 <img src="/images/logo.png" />
                 <HashRouter>
-                    <div>
+                    <div className="form-wrapper">
                         <Route exact path="/" component={Registration} />
                         <Route path="/login" component={Login} />
                     </div>

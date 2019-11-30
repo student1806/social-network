@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { ProfilePic } from "./profile-pic";
 
 export default class Header extends Component {
     constructor(props) {
@@ -9,6 +10,10 @@ export default class Header extends Component {
         return (
             <header>
                 <img className="avatar" src="/images/logo.png" alt="Logo" />
+                <ProfilePic
+                    imgurl={this.props.imgurl}
+                    toggleModal={this.props.toggleModal}
+                />
             </header>
         );
     }

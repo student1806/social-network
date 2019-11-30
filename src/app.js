@@ -3,6 +3,7 @@ import axios from "./axios";
 import { ProfilePic } from "./profile-pic";
 import UpLoader from "./uploader";
 import { Profile } from "./profile";
+import Header from "./header";
 
 export default class App extends Component {
     constructor(props) {
@@ -47,13 +48,13 @@ export default class App extends Component {
         this.setState({ bio: upDateBio });
     }
     render() {
-        //renders the page only when the content is back
-        // if (!this.state.first) {
-        //     return null;
-        // }
+        // renders the page only when the content is back
+        if (!this.state.firstname) {
+            return null;
+        }
         return (
-            <div>
-                <header>
+            <>
+                {/* <header>
                     <img className="logo" src="/images/logo.png" alt="Logo" />
                     <div onClick={this.toggleModal}>
                         <ProfilePic
@@ -62,7 +63,11 @@ export default class App extends Component {
                             imgurl={this.state.imgurl}
                         />
                     </div>
-                </header>
+                </header> */}
+                <Header
+                    imgurl={this.state.imgurl}
+                    toggleModal={this.toggleModal}
+                ></Header>
 
                 <Profile
                     firstname={this.state.firstname}
@@ -71,11 +76,10 @@ export default class App extends Component {
                     bio={this.state.bio}
                     upDateBio={this.upDateBio}
                 />
-
                 {this.state.uploaderIsVisible && (
                     <UpLoader upLoadImage={this.upLoadImage} />
                 )}
-            </div>
+            </>
         );
     }
 }

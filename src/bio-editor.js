@@ -11,9 +11,7 @@ export class BioEditor extends React.Component {
     }
 
     componentDidMount() {
-        // change the state of the button depending on the information from the database
-        //if else
-        console.log("propros in the bio editor ", this.props);
+        //console.log("propros in the bio editor ", this.props);
         if (!this.props.bio) {
             this.setState(
                 {
@@ -24,7 +22,7 @@ export class BioEditor extends React.Component {
         }
     }
 
-    toggleModal() {
+    openText() {
         this.setState({
             editingMode: !this.state.editingMode
         });
@@ -69,7 +67,7 @@ export class BioEditor extends React.Component {
             return (
                 <div>
                     <p>{this.props.bio}</p>
-                    <button onClick={() => this.toggleModal()}>
+                    <button onClick={() => this.openText()}>
                         {this.state.buttonText}
                     </button>
                 </div>
@@ -77,8 +75,3 @@ export class BioEditor extends React.Component {
         }
     }
 }
-// needs to be in 2 states
-// add bio or show bio
-// edit button
-// onclick envent on the butto that can change the state of the editor
-// when we click on the save button, a axios requested is needed the to update the bio
