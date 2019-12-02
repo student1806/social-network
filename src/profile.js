@@ -2,7 +2,7 @@ import React from "react";
 import { ProfilePic } from "./profile-pic";
 import { BioEditor } from "./bio-editor";
 
-let bioCard = {
+export let bioCard = {
     border: "1px solid black",
     height: 400,
     width: 500,
@@ -20,6 +20,7 @@ export function Profile(props) {
                 firstname={props.firstname}
                 lastname={props.lastname}
                 imgurl={props.imgurl}
+                classPic="bio-image"
             />
             <div style={editor}>
                 <h3>
@@ -31,6 +32,7 @@ export function Profile(props) {
                     imgurl={props.imgurl}
                     bio={props.bio}
                     upDateBio={props.upDateBio}
+                    id={props.id}
                 />
             </div>
         </section>

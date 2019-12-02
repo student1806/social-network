@@ -68,7 +68,7 @@ app.get("/welcome", function(req, res) {
 });
 
 //name it with the json extention to avoid conflict with the client rendering page
-app.get("/userinfo.json", async (req, res) => {
+app.get("/user.json", async (req, res) => {
     try {
         let userInfo = await db.getUserInfo(req.session.userId);
         res.json({
@@ -79,17 +79,22 @@ app.get("/userinfo.json", async (req, res) => {
     }
 });
 
-app.get("/user/:id", async (req, res) => {
+app.get("/user.json/:id", async (req, res) => {
     const { id } = req.params;
-    console.log("paramsn url: ", id);
-
-    try {
-        let otherUser = await db.getUserInfo(id);
+    const { userId } = req.session;
+    if (id != userId) {
+        try {
+            let { rows } = await db.getUserInfo(id);
+            res.json({
+                otherUser: rows[0]
+            });
+        } catch (error) {
+            console.log("Error on the get user/:id route: ", error);
+        }
+    } else {
         res.json({
-            otherUser: otherUser.rows[0]
+            success: false
         });
-    } catch (error) {
-        console.log("Error on the get user/:id route: ", error);
     }
 });
 

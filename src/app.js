@@ -19,14 +19,15 @@ export default class App extends Component {
     }
     componentDidMount() {
         axios
-            .get("/userinfo.json")
+            .get("/user.json")
             .then(({ data }) => {
-                console.log("data from app ", data);
+                //console.log("data from app ", data);
                 this.setState({
                     firstname: data.userInfo.firstname,
                     lastname: data.userInfo.lastname,
                     imgurl: data.userInfo.url,
-                    bio: data.userInfo.bio
+                    bio: data.userInfo.bio,
+                    id: data.userInfo.id
                 });
             })
             .catch(err => {
@@ -56,23 +57,8 @@ export default class App extends Component {
         }
         return (
             <>
-                {/* <header>
-                    <img className="logo" src="/images/logo.png" alt="Logo" />
-                    <div onClick={this.toggleModal}>
-                        <ProfilePic
-                            firstname={this.state.firstname}
-                            lastname={this.state.lastname}
-                            imgurl={this.state.imgurl}
-                        />
-                    </div>
-                </header> */}
-                {/* <Header
-                    imgurl={this.state.imgurl}
-                    toggleModal={this.toggleModal}
-                ></Header> */}
-
                 <BrowserRouter>
-                    <div>
+                    <>
                         <Header
                             imgurl={this.state.imgurl}
                             toggleModal={this.toggleModal}
@@ -87,22 +73,15 @@ export default class App extends Component {
                                     lastname={this.state.lastname}
                                     imgurl={this.state.imgurl}
                                     bio={this.state.bio}
+                                    id={this.state.id}
                                     upDateBio={this.upDateBio}
                                 />
                             )}
                         />
                         {/* can't have the same name as the router from the server */}
                         <Route path="/user/:id" component={OtherProfile} />
-                    </div>
+                    </>
                 </BrowserRouter>
-
-                {/* <Profile
-                    firstname={this.state.firstname}
-                    lastname={this.state.lastname}
-                    imgurl={this.state.imgurl}
-                    bio={this.state.bio}
-                    upDateBio={this.upDateBio}
-                /> */}
                 {this.state.uploaderIsVisible && (
                     <UpLoader upLoadImage={this.upLoadImage} />
                 )}

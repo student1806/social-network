@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "./axios";
+import { ProfilePic } from "./profile-pic";
+import { bioCard } from "./profile";
 
 export class OtherProfile extends React.Component {
     constructor() {
@@ -7,31 +9,48 @@ export class OtherProfile extends React.Component {
         this.state = {};
     }
 
-    componentDidMount() {
-        console.log("this.props.match: ", this.props.match);
-        //find the id of the user
-        console.log("this.props.match.params.id", this.props.match.params.id);
-        //we need to figureout if the otheruser Id id the same as the logged user id
-        if (this.props.match.params.id == 6) {
+    async componentDidMount() {
+        //console.log("this.props.match: ", this.props.match);
+        let otherId = this.props.match.params.id;
+        // if (this.props.match.params.id == 6) {
+        //     this.props.history.push("/");
+        // } else {
+        try {
+            let { data } = await axios.get("/user.json/" + otherId);
+            let { otherUser } = data;
+
+            console.log("response. ", data);
+
+            this.setState({
+                firstname: otherUser.firstname,
+                lastname: otherUser.lastname,
+                imgurl: otherUser.url,
+                bio: otherUser.bio
+            });
+        } catch (e) {
+            console.log("Error on the getOther request; ", e);
             this.props.history.push("/");
         }
-    }
-    async getOther() {
-        let res = await axios.get("/user/" + this.props.match.params.id);
-        let { data } = res.data;
-        this.setState({
-            firstname: data.userInfo.firstname,
-            lastname: data.userInfo.lastname,
-            imgurl: data.userInfo.url,
-            bio: data.userInfo.bio
-        });
+        //}
     }
 
     render() {
         return (
-            <div>
-                <h1>This is the other prolfile page</h1>
-            </div>
+            <section style={bioCard}>
+                <ProfilePic
+                    firstname={this.state.firstname}
+                    lastname={this.state.lastname}
+                    imgurl={this.state.imgurl}
+                    bio={this.state.bio}
+                    classPic="bio-image"
+                />
+                <div>
+                    <h3>
+                        {this.state.firstname} {this.state.lastname}
+                    </h3>
+                    <p>{this.state.bio}</p>
+                </div>
+            </section>
         );
     }
 }

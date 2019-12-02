@@ -13,6 +13,7 @@ export default class Header extends Component {
                 <ProfilePic
                     imgurl={this.props.imgurl}
                     toggleModal={this.props.toggleModal}
+                    classPic="avatar"
                 />
             </header>
         );

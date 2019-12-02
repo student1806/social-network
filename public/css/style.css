@@ -32,7 +32,14 @@ img {
 
 .avatar {
     height: 100px;
-    width: auto;
+    width: 100px;
+    border-radius: 50%;
+}
+
+.bio-image {
+    height: 200px;
+    width: 200px;
+    margin: 20px;
 }
 
 .upload-image {
