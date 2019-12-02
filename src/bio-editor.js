@@ -55,19 +55,22 @@ export class BioEditor extends React.Component {
         if (this.state.editingMode) {
             return (
                 <>
-                    <h1>I am the editor mode</h1>
                     <textarea
+                        rows="5"
+                        cols="33"
                         onChange={e => this.handleChange(e.target)}
                         defaultValue={this.props.bio}
                     />
-                    <button onClick={e => this.clickHandler(e)}>save</button>
+                    <button id="link-btn" onClick={e => this.clickHandler(e)}>
+                        save
+                    </button>
                 </>
             );
         } else {
             return (
                 <>
                     <p>{this.props.bio}</p>
-                    <button onClick={() => this.openText()}>
+                    <button id="link-btn" onClick={() => this.openText()}>
                         {buttonText}
                     </button>
                 </>

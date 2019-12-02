@@ -37,8 +37,8 @@ img {
 }
 
 .bio-image {
-    height: 200px;
-    width: 200px;
+    height: auto;
+    width: 350px;
     margin: 20px;
 }
 
@@ -54,6 +54,26 @@ img {
 .logo {
     height: 100px;
     width: auto;
+}
+
+button {
+    background: #355ddf;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+#link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2835f0;
+    font-family: sans-serif;
+    font-size: 1em;
+    text-decoration: underline;
+    cursor: pointer;
+    align-self: flex-start;
 }
 
 #form {

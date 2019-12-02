@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "./axios";
-// import { ProfilePic } from "./profile-pic";
 import UpLoader from "./uploader";
 import { Profile } from "./profile";
 import Header from "./header";
@@ -17,22 +16,19 @@ export default class App extends Component {
         this.upLoadImage = this.upLoadImage.bind(this);
         this.upDateBio = this.upDateBio.bind(this);
     }
-    componentDidMount() {
-        axios
-            .get("/user.json")
-            .then(({ data }) => {
-                //console.log("data from app ", data);
-                this.setState({
-                    firstname: data.userInfo.firstname,
-                    lastname: data.userInfo.lastname,
-                    imgurl: data.userInfo.url,
-                    bio: data.userInfo.bio,
-                    id: data.userInfo.id
-                });
-            })
-            .catch(err => {
-                console.log("error on the image upload: ", err);
+    async componentDidMount() {
+        try {
+            let { data } = await axios.get("/user.json");
+            this.setState({
+                firstname: data.userInfo.firstname,
+                lastname: data.userInfo.lastname,
+                bio: data.userInfo.bio,
+                imgurl: data.userInfo.url,
+                id: data.userInfo.id
             });
+        } catch (err) {
+            console.log("error on the image upload: ", err);
+        }
     }
 
     toggleModal() {

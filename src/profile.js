@@ -3,15 +3,20 @@ import { ProfilePic } from "./profile-pic";
 import { BioEditor } from "./bio-editor";
 
 export let bioCard = {
-    border: "1px solid black",
     height: 400,
-    width: 500,
+    width: 600,
     display: "flex",
     justifyContent: "space-around",
     margin: 40
 };
 
-let editor = {};
+export let editor = {
+    margin: 10,
+    padding: 10,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly"
+};
 
 export function Profile(props) {
     return (

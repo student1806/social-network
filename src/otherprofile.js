@@ -2,6 +2,7 @@ import React from "react";
 import axios from "./axios";
 import { ProfilePic } from "./profile-pic";
 import { bioCard } from "./profile";
+import { editor } from "./profile";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
@@ -45,7 +46,7 @@ export class OtherProfile extends React.Component {
                     bio={this.state.bio}
                     classPic="bio-image"
                 />
-                <div>
+                <div style={editor}>
                     <h3>
                         {this.state.firstname} {this.state.lastname}
                     </h3>
