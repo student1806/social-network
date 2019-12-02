@@ -7,27 +7,22 @@ export default class Login extends Component {
         super(props);
         this.state = {};
     }
-    submit() {
-        axios
-            .post("/login", {
-                email: this.state.email,
-                password: this.state.password
-            })
-            .then(({ data }) => {
-                if (data.success) {
-                    location.replace("/");
-                } else {
-                    this.setState({
-                        error: true
-                    });
-                }
-            })
-            .catch(err => {
-                console.log("Error on the POST Log in page: ", err);
-                this.setState({
+    async submit() {
+        const auth = {
+            email: this.state.email,
+            password: this.state.password
+        };
+        try {
+            let { data } = await axios.post("/login", auth);
+            if (!data.success) {
+                return this.setState({
                     error: true
                 });
-            });
+            }
+            location.replace("/");
+        } catch (err) {
+            console.log("Error on the POST Log in page: ", err);
+        }
     }
     handleChange(inputElement) {
         this.setState({

@@ -103,23 +103,26 @@ app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        let getHashed = await db.getUser(email);
-        let comaparePw = await compare(password, getHashed.rows[0].password);
-        if (comaparePw) {
-            req.session.userId = getHashed.rows[0].id;
-            res.json({
-                success: true
-            });
-        } else {
-            res.json({
+        let { rows } = await db.getUser(email);
+        if (rows.length === 0) {
+            return res.json({
                 success: false
             });
         }
+
+        let comaparePw = await compare(password, rows[0].password);
+        if (!comaparePw) {
+            return res.json({
+                success: false
+            });
+        }
+
+        req.session.userId = rows[0].id;
+        res.json({
+            success: true
+        });
     } catch (err) {
         console.log("Error on the login route: ", err);
-        res.json({
-            success: false
-        });
     }
 });
 
@@ -161,6 +164,11 @@ app.post("/updatebio", async (req, res) => {
     } catch (err) {
         console.log("Error on the update-bio route: ", err);
     }
+});
+
+app.get("/logout", (req, res) => {
+    req.session.userId = null;
+    res.redirect("/");
 });
 
 app.get("*", function(req, res) {
