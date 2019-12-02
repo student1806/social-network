@@ -2,23 +2,37 @@ import React from "react";
 import { ProfilePic } from "./profile-pic";
 import { BioEditor } from "./bio-editor";
 
+let bioCard = {
+    border: "1px solid black",
+    height: 400,
+    width: 500,
+    display: "flex",
+    "justify-content": "space-around",
+    margin: 40
+};
+
+let editor = {};
+
 export function Profile(props) {
     return (
-        <>
-            <h1>I am the profile picture {props.firstname}</h1>
+        <section style={bioCard}>
             <ProfilePic
                 firstname={props.firstname}
                 lastname={props.lastname}
                 imgurl={props.imgurl}
             />
-
-            <BioEditor
-                firstname={props.firstname}
-                lastname={props.lastname}
-                imgurl={props.imgurl}
-                bio={props.bio}
-                upDateBio={props.upDateBio}
-            />
-        </>
+            <div style={editor}>
+                <h3>
+                    {props.firstname} {props.lastname}
+                </h3>
+                <BioEditor
+                    firstname={props.firstname}
+                    lastname={props.lastname}
+                    imgurl={props.imgurl}
+                    bio={props.bio}
+                    upDateBio={props.upDateBio}
+                />
+            </div>
+        </section>
     );
 }

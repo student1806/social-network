@@ -10,3 +10,5 @@ export function ProfilePic({ firstname, imgurl, lastname, toggleModal }) {
         </>
     );
 }
+//conditionaly uses a class to the image className={size}
+//let size = props.primary = ? 'primary': 'secondary'

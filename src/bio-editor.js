@@ -34,16 +34,15 @@ export class BioEditor extends React.Component {
         });
     }
     clickHandler() {
-        console.log(this.state.bio);
-        let obj = { bioTex: this.state.bio };
+        let bioObj = { bioTex: this.state.bio };
         axios
-            .post("/updatebio", obj)
+            .post("/updatebio", bioObj)
             .then(res => {
                 this.setState({
                     bio: res.data.bio,
                     editingMode: false
                 });
-                console.log(this.state.bio);
+                //console.log(this.state.bio);
                 this.props.upDateBio(res.data.bio);
             })
             .catch(err => {
@@ -54,23 +53,23 @@ export class BioEditor extends React.Component {
     render() {
         if (this.state.editingMode) {
             return (
-                <div>
+                <>
                     <h1>I am the editor mode</h1>
                     <textarea
                         onChange={e => this.handleChange(e.target)}
                         defaultValue={this.props.bio}
                     />
                     <button onClick={e => this.clickHandler(e)}>save</button>
-                </div>
+                </>
             );
         } else {
             return (
-                <div>
+                <>
                     <p>{this.props.bio}</p>
                     <button onClick={() => this.openText()}>
                         {this.state.buttonText}
                     </button>
-                </div>
+                </>
             );
         }
     }
