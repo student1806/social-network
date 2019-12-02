@@ -7,7 +7,7 @@ let bioCard = {
     height: 400,
     width: 500,
     display: "flex",
-    "justify-content": "space-around",
+    justifyContent: "space-around",
     margin: 40
 };
 

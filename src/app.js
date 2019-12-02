@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from "./axios";
-import { ProfilePic } from "./profile-pic";
+// import { ProfilePic } from "./profile-pic";
 import UpLoader from "./uploader";
 import { Profile } from "./profile";
 import Header from "./header";
+import { BrowserRouter, Route } from "react-router-dom";
+import { OtherProfile } from "./otherprofile";
 
 export default class App extends Component {
     constructor(props) {
@@ -17,7 +19,7 @@ export default class App extends Component {
     }
     componentDidMount() {
         axios
-            .get("/userinfo")
+            .get("/userinfo.json")
             .then(({ data }) => {
                 console.log("data from app ", data);
                 this.setState({
@@ -64,18 +66,43 @@ export default class App extends Component {
                         />
                     </div>
                 </header> */}
-                <Header
+                {/* <Header
                     imgurl={this.state.imgurl}
                     toggleModal={this.toggleModal}
-                ></Header>
+                ></Header> */}
 
-                <Profile
+                <BrowserRouter>
+                    <div>
+                        <Header
+                            imgurl={this.state.imgurl}
+                            toggleModal={this.toggleModal}
+                        ></Header>
+
+                        <Route
+                            exact
+                            path="/"
+                            render={() => (
+                                <Profile
+                                    firstname={this.state.firstname}
+                                    lastname={this.state.lastname}
+                                    imgurl={this.state.imgurl}
+                                    bio={this.state.bio}
+                                    upDateBio={this.upDateBio}
+                                />
+                            )}
+                        />
+                        {/* can't have the same name as the router from the server */}
+                        <Route path="/user/:id" component={OtherProfile} />
+                    </div>
+                </BrowserRouter>
+
+                {/* <Profile
                     firstname={this.state.firstname}
                     lastname={this.state.lastname}
                     imgurl={this.state.imgurl}
                     bio={this.state.bio}
                     upDateBio={this.upDateBio}
-                />
+                /> */}
                 {this.state.uploaderIsVisible && (
                     <UpLoader upLoadImage={this.upLoadImage} />
                 )}

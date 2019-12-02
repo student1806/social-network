@@ -11,15 +11,12 @@ export class BioEditor extends React.Component {
     }
 
     componentDidMount() {
-        //console.log("propros in the bio editor ", this.props);
-        if (!this.props.bio) {
-            this.setState(
-                {
-                    buttonText: "add your bio"
-                },
-                () => console.log("this stae  ", this.state)
-            );
-        }
+        console.log("propros in the bio editor ", this.props);
+        // if (!this.props.bio) {
+        //     this.setState({
+        //         buttonText: "add your bio"
+        //     });
+        // }
     }
 
     openText() {
@@ -51,6 +48,10 @@ export class BioEditor extends React.Component {
     }
 
     render() {
+        let buttonText;
+        this.props.bio
+            ? (buttonText = "Edit your bio")
+            : (buttonText = "Add your bio");
         if (this.state.editingMode) {
             return (
                 <>
@@ -67,7 +68,7 @@ export class BioEditor extends React.Component {
                 <>
                     <p>{this.props.bio}</p>
                     <button onClick={() => this.openText()}>
-                        {this.state.buttonText}
+                        {buttonText}
                     </button>
                 </>
             );

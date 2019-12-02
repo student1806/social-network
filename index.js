@@ -67,7 +67,8 @@ app.get("/welcome", function(req, res) {
     }
 });
 
-app.get("/userinfo", async (req, res) => {
+//name it with the json extention to avoid conflict with the client rendering page
+app.get("/userinfo.json", async (req, res) => {
     try {
         let userInfo = await db.getUserInfo(req.session.userId);
         res.json({
@@ -75,6 +76,20 @@ app.get("/userinfo", async (req, res) => {
         });
     } catch (e) {
         console.log("Error on the get user info: ", e);
+    }
+});
+
+app.get("/user/:id", async (req, res) => {
+    const { id } = req.params;
+    console.log("paramsn url: ", id);
+
+    try {
+        let otherUser = await db.getUserInfo(id);
+        res.json({
+            otherUser: otherUser.rows[0]
+        });
+    } catch (error) {
+        console.log("Error on the get user/:id route: ", error);
     }
 });
 
