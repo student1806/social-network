@@ -4,34 +4,35 @@ import { ProfilePic } from "./profile-pic";
 import { bioCard } from "./profile";
 
 export class OtherProfile extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {};
     }
 
     async componentDidMount() {
-        //console.log("this.props.match: ", this.props.match);
         let otherId = this.props.match.params.id;
-        // if (this.props.match.params.id == 6) {
-        //     this.props.history.push("/");
-        // } else {
+        // if (this.props.match.params.id != this.props.id) {
         try {
             let { data } = await axios.get("/user.json/" + otherId);
             let { otherUser } = data;
-
             console.log("response. ", data);
 
-            this.setState({
-                firstname: otherUser.firstname,
-                lastname: otherUser.lastname,
-                imgurl: otherUser.url,
-                bio: otherUser.bio
-            });
+            if (data.success) {
+                this.setState({
+                    firstname: otherUser.firstname,
+                    lastname: otherUser.lastname,
+                    imgurl: otherUser.url,
+                    bio: otherUser.bio
+                });
+            } else {
+                this.props.history.push("/");
+            }
         } catch (e) {
             console.log("Error on the getOther request; ", e);
-            this.props.history.push("/");
         }
-        //}
+        // } else {
+        //     this.props.history.push("/");
+        // }
     }
 
     render() {

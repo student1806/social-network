@@ -86,7 +86,8 @@ app.get("/user.json/:id", async (req, res) => {
         try {
             let { rows } = await db.getUserInfo(id);
             res.json({
-                otherUser: rows[0]
+                otherUser: rows[0],
+                success: true
             });
         } catch (error) {
             console.log("Error on the get user/:id route: ", error);

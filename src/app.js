@@ -79,7 +79,17 @@ export default class App extends Component {
                             )}
                         />
                         {/* can't have the same name as the router from the server */}
-                        <Route path="/user/:id" component={OtherProfile} />
+                        <Route
+                            path="/user/:id"
+                            render={props => (
+                                <OtherProfile
+                                    id={this.state.id}
+                                    key={props.match.url}
+                                    match={props.match}
+                                    history={props.history}
+                                />
+                            )}
+                        />
                     </>
                 </BrowserRouter>
                 {this.state.uploaderIsVisible && (
@@ -88,4 +98,6 @@ export default class App extends Component {
             </>
         );
     }
+
+    //component={OtherProfile}
 }
