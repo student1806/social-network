@@ -99,25 +99,24 @@ app.get("/user.json/:id", async (req, res) => {
     }
 });
 
-app.get("/users.json/:val", async (req, res) => {
+app.get("/api/users/", async (req, res) => {
     try {
         let { rows } = await db.getNewUsers();
-        res.json({
-            newUsers: rows
-        });
+        res.json(rows);
     } catch (error) {
         console.log("Error on the get more users: ", error);
     }
 });
 
-// app.get("/users.json/search/:val", async (req, res) => {
-//     try {
-//         let { rows } = await db.searchUsers();
-//         res.json(rows);
-//     } catch (err) {
-//         console.log("Error on the seacrh users route: ", err);
-//     }
-// });
+app.get("/api/find-users/:val", async (req, res) => {
+    const { val } = req.params;
+    try {
+        let { rows } = await db.searchUsers(val);
+        res.json(rows);
+    } catch (err) {
+        console.log("Error on the seacrh users route: ", err);
+    }
+});
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;

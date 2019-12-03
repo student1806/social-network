@@ -31,10 +31,13 @@ module.exports.getNewUsers = () => {
 module.exports.searchUsers = val => {
     return db.query(
         `SELECT id, firstname, lastname, url FROM users 
-        WHERE firstname ILIKE $1;`,
+        WHERE firstname ILIKE $1
+        LIMIT 4`,
         [val + "%"]
     );
 };
+// SELECT firstname FROM users
+// WHERE firstname ILIKE 'an%';
 
 module.exports.getUserInfo = function(id) {
     return db.query(
