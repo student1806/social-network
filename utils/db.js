@@ -19,6 +19,23 @@ module.exports.getUser = function(email) {
     );
 };
 
+module.exports.getNewUsers = () => {
+    return db.query(
+        `SELECT id, firstname, lastname, url FROM users
+        ORDER BY created_at DESC
+        LIMIT 3
+        `
+    );
+};
+
+module.exports.searchUsers = val => {
+    return db.query(
+        `SELECT id, firstname, lastname, url FROM users 
+        WHERE firstname ILIKE $1;`,
+        [val + "%"]
+    );
+};
+
 module.exports.getUserInfo = function(id) {
     return db.query(
         `SELECT id, firstname, lastname, email, url, bio FROM users
