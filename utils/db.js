@@ -36,8 +36,6 @@ module.exports.searchUsers = val => {
         [val + "%"]
     );
 };
-// SELECT firstname FROM users
-// WHERE firstname ILIKE 'an%';
 
 module.exports.getUserInfo = function(id) {
     return db.query(
@@ -61,5 +59,43 @@ module.exports.updateBio = (bio, id) => {
         WHERE id=$2
         RETURNING bio`,
         [bio, id]
+    );
+};
+
+module.exports.friendStatus = (userId, otherId) => {
+    return db.query(
+        `SELECT * FROM friendships 
+        WHERE (receiver_id = $1 AND sender_id = $2)
+        OR (receiver_id = $2 AND sender_id = $1)`,
+        [otherId, userId]
+    );
+};
+
+module.exports.friendRequest = (otherId, userId) => {
+    return db.query(
+        `INSERT INTO friendships (receiver_id, sender_id)
+        VALUES ($1, $2)
+        RETURNING *`,
+        [otherId, userId]
+    );
+};
+
+module.exports.upDateFriendRequest = (userId, otherId) => {
+    return db.query(
+        `
+        UPDATE friendships SET accepted= $3 
+        WHERE (receiver_id = $1 AND sender_id = $2)
+        OR (receiver_id = $2 AND sender_id = $1)`,
+        [otherId, userId, true]
+    );
+};
+
+module.exports.deleteFriendRequest = (userId, otherId) => {
+    return db.query(
+        `
+        DELETE FROM friendships
+        WHERE (receiver_id = $1 AND sender_id = $2)
+        OR (receiver_id = $2 AND sender_id = $1)`,
+        [otherId, userId]
     );
 };

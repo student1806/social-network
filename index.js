@@ -118,6 +118,60 @@ app.get("/api/find-users/:val", async (req, res) => {
     }
 });
 
+// new route to get friendship relationship
+app.get("/friend-status/:otherId", async (req, res) => {
+    const { otherId } = req.params;
+    const { userId } = req.session;
+    //console.log("otherId: ", otherId);
+    //console.log("userId: ", userId);
+
+    try {
+        let { rows } = await db.friendStatus(otherId, userId);
+
+        //console.log("sender: ", rows[0].sender_id);
+        if (rows.length == 0) {
+            res.json("Make Friend request");
+        } else if (rows[0].sender_id == otherId && !rows[0].accepted) {
+            res.json("Accept Friendship");
+        } else if (!rows[0].accepted) {
+            res.json("Cancel Friends Request");
+        } else {
+            res.json("end friendship");
+        }
+    } catch (err) {
+        console.log("Error on the friends status route: ", err);
+    }
+});
+
+app.post("/friend-status", async (req, res) => {
+    const { otherId } = req.body;
+    const { userId } = req.session;
+    const { buttonText } = req.body;
+
+    //console.log("buttonText", buttonText);
+
+    try {
+        if (buttonText == "Make Friend request") {
+            await db.friendRequest(otherId, userId);
+            return res.json("Cancel Friends Request");
+        }
+
+        if (buttonText == "Accept Friendship") {
+            await db.upDateFriendRequest(otherId, userId);
+            return res.json("end friendship");
+        }
+
+        if (buttonText == "end friendship" || "cancel friend request") {
+            await db.deleteFriendRequest(otherId, userId);
+            return res.json("Make Friend request");
+        }
+    } catch (err) {
+        console.log("Error on the request friendship route: ", err);
+    }
+
+    //console.log("otherId: ", otherId);
+});
+
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 

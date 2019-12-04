@@ -3,6 +3,7 @@ import axios from "./axios";
 import { ProfilePic } from "./profile-pic";
 import { bioCard } from "./profile";
 import { editor } from "./profile";
+import { FriendshipButton } from "./friendship-button";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export class OtherProfile extends React.Component {
         try {
             let { data } = await axios.get("/user.json/" + otherId);
             let { otherUser } = data;
-            console.log("response. ", data);
+            //console.log("response. ", data);
 
             if (data.success) {
                 this.setState({
@@ -51,6 +52,7 @@ export class OtherProfile extends React.Component {
                         {this.state.firstname} {this.state.lastname}
                     </h3>
                     <p>{this.state.bio}</p>
+                    <FriendshipButton otherId={this.props.match.params.id} />
                 </div>
             </section>
         );
