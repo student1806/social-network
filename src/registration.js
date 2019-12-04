@@ -16,13 +16,12 @@ export default class Registration extends Component {
                 last: this.state.last
             })
             .then(({ data }) => {
-                if (data.success) {
-                    location.replace("/");
-                } else {
-                    this.setState({
+                if (!data) {
+                    return this.setState({
                         error: true
                     });
                 }
+                location.replace("/");
             })
             .catch(err => {
                 console.log("Error on the POST register page: ", err);

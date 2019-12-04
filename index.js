@@ -147,19 +147,19 @@ app.post("/login", async (req, res) => {
 
 app.post("/registration", async (req, res) => {
     const { first, last, email, password } = req.body;
+    const inputSize = Object.keys(req.body).length;
+
+    if (inputSize < 4) {
+        return res.json(false);
+    }
     try {
         let hashedpwd = await hash(password);
         let id = await db.addUser(first, last, email, hashedpwd);
 
         req.session.userId = id.rows[0].id;
-        res.json({
-            success: true
-        });
+        res.json(true);
     } catch (err) {
         console.log("error on the post registration: ", err);
-        res.json({
-            success: false
-        });
     }
 });
 
