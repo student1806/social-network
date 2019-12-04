@@ -11,7 +11,13 @@ test("'Add your bio' should display if no bio is available", () => {
 });
 
 test("'Edit your bio' should display if the user entered a bio", () => {
-    const { container } = render(<BioEditor />);
+    const { container } = render(<BioEditor bio="Edit your bio" />);
 
     expect(container.querySelector("button").innerHTML).toBe("Edit your bio");
+});
+
+test("Click on the button render a textarea and save button", () => {
+    const { container } = render(<BioEditor />);
+
+    expect(container.querySelector("div")).toContain("hi");
 });

@@ -11,7 +11,6 @@ export function FriendshipButton({ otherId }) {
         (async () => {
             try {
                 let { data } = await axios.get("/friend-status/" + otherId);
-                //console.log("Friends status: ", data);
                 setButtonText(data);
             } catch (error) {
                 console.log("error on the friendship: ", error);
@@ -21,8 +20,6 @@ export function FriendshipButton({ otherId }) {
     console.log("buttonText: ", buttonText);
 
     function submit() {
-        //OR make a post to onme route, and let the route determine the logic
-
         (async () => {
             try {
                 let { data } = await axios.post("/friend-status/", {
