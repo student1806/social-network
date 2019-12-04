@@ -23,11 +23,14 @@ export function FindPeople() {
         //console.log("searchUsers: ", searchUsers);
 
         let ignore = false;
+        if (val == "") {
+            setSearchUsers([]);
+            return;
+        }
         (async () => {
             try {
                 const { data } = await axios.get("/api/find-users/" + val);
                 if (!ignore) {
-                    //console.log(data);
                     setSearchUsers(data);
                 } else {
                     setSearchUsers([]);
@@ -48,25 +51,33 @@ export function FindPeople() {
                 <h3>Find People</h3>
                 <p>Check new users</p>
 
-                {users.map(user => {
-                    return (
-                        <div key={user.id}>
-                            <ProfilePic imgurl={user.url} classPic="avatar" />
-                            {user.firstname} {user.lastname}
-                        </div>
-                    );
-                })}
+                {users &&
+                    users.map(user => {
+                        return (
+                            <div key={user.id}>
+                                <ProfilePic
+                                    imgurl={user.url}
+                                    classPic="avatar"
+                                />
+                                {user.firstname} {user.lastname}
+                            </div>
+                        );
+                    })}
 
                 <p>Search for someone?</p>
                 <input onChange={e => setVal(e.target.value)} />
-                {searchUsers.map(user => {
-                    return (
-                        <div key={user.id}>
-                            <ProfilePic imgurl={user.url} classPic="avatar" />
-                            {user.firstname} {user.lastname}
-                        </div>
-                    );
-                })}
+                {searchUsers &&
+                    searchUsers.map(user => {
+                        return (
+                            <div key={user.id}>
+                                <ProfilePic
+                                    imgurl={user.url}
+                                    classPic="avatar"
+                                />
+                                {user.firstname} {user.lastname}
+                            </div>
+                        );
+                    })}
             </section>
         </>
     );
