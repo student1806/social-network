@@ -31,13 +31,16 @@ export default class UpLoader extends React.Component {
     render() {
         return (
             <div className="upload-image">
-                <h3>Change your profile pic?</h3>
+                <h2 className="up-img-tl">Change profile picture</h2>
                 <input
+                    className="inputfile"
+                    id="file"
                     type="file"
                     name="file"
                     accept="images/*"
                     onChange={e => this.handleChange(e.target)}
                 />
+                <label htmlFor="file">📂 Choose an image...</label>
             </div>
         );
     }
