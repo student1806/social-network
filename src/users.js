@@ -49,12 +49,12 @@ export function FindPeople() {
         <>
             <section>
                 <h3>Find People</h3>
-                <p>Check new users</p>
 
+                <p>Check new users</p>
                 {users &&
                     users.map(user => {
                         return (
-                            <div key={user.id}>
+                            <div className="user-search" key={user.id}>
                                 <ProfilePic
                                     imgurl={user.url}
                                     classPic="avatar"
@@ -69,7 +69,7 @@ export function FindPeople() {
                 {searchUsers &&
                     searchUsers.map(user => {
                         return (
-                            <div key={user.id}>
+                            <div className="user-search" key={user.id}>
                                 <ProfilePic
                                     imgurl={user.url}
                                     classPic="avatar"

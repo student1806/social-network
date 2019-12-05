@@ -31,7 +31,7 @@ export default class Login extends Component {
     }
     render() {
         return (
-            <div className="login">
+            <div className="form">
                 <h3>Please log in below</h3>
                 {this.state.error && (
                     <div className="error">Something went wrong</div>

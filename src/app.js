@@ -91,7 +91,10 @@ export default class App extends Component {
                     <Route path="/users/" component={FindPeople} />
                 </BrowserRouter>
                 {this.state.uploaderIsVisible && (
-                    <UpLoader upLoadImage={this.upLoadImage} />
+                    <UpLoader
+                        toggleModal={this.toggleModal}
+                        upLoadImage={this.upLoadImage}
+                    />
                 )}
             </>
         );

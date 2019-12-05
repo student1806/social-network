@@ -4,7 +4,7 @@ module.exports.getFriendStatus = async (otherId, userId) => {
     try {
         let { rows } = await db.friendStatus(otherId, userId);
         if (rows.length == 0) {
-            return "Make Friend request";
+            return "Make Friend Request";
         }
         if (rows[0].sender_id == otherId && !rows[0].accepted) {
             return "Accept Friendship";
@@ -12,7 +12,7 @@ module.exports.getFriendStatus = async (otherId, userId) => {
         if (!rows[0].accepted) {
             return "Cancel Friends Request";
         } else {
-            return "end friendship";
+            return "End Friendship";
         }
     } catch (error) {
         console.log("error on the get friends function: ", error);
@@ -27,9 +27,9 @@ module.exports.updateRequestFriendship = async (otherId, id, btn) => {
         }
         if (btn == "Accept Friendship") {
             await db.upDateFriendRequest(otherId, id);
-            return "end friendship";
+            return "End Friendship";
         }
-        if (btn == "End friendship" || "Cancel Friends Request") {
+        if (btn == "End Friendship" || "Cancel Friends Request") {
             await db.deleteFriendRequest(otherId, id);
             return "Make Friend Request";
         }

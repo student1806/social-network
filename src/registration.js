@@ -37,11 +37,11 @@ export default class Registration extends Component {
     }
     render() {
         return (
-            <div id="form">
+            <div className="form">
+                <h3>Join the Social network below</h3>
                 {this.state.error && (
                     <div className="error">Something went wrong</div>
                 )}
-                <h3>Join the Social network below</h3>
                 <input
                     type="text"
                     name="first"
