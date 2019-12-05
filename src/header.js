@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { ProfilePic } from "./profile-pic";
+import { Link } from "react-router-dom";
 
 export default class Header extends Component {
     constructor(props) {
@@ -10,11 +11,19 @@ export default class Header extends Component {
         return (
             <header>
                 <img className="avatar" src="/images/logo.png" alt="Logo" />
-                <ProfilePic
-                    imgurl={this.props.imgurl}
-                    toggleModal={this.props.toggleModal}
-                    classPic="avatar"
-                />
+                <nav>
+                    <Link className="link-nav" to="/users">
+                        Users
+                    </Link>
+                    <a className="link-nav" href="/logout">
+                        Logout
+                    </a>
+                    <ProfilePic
+                        imgurl={this.props.imgurl}
+                        toggleModal={this.props.toggleModal}
+                        classPic="avatar"
+                    />
+                </nav>
             </header>
         );
     }

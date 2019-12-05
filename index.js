@@ -132,18 +132,6 @@ app.get("/friend-status/:otherId", async (req, res) => {
     try {
         let getBtnText = await getFriendStatus(otherId, userId);
         res.json(getBtnText);
-
-        //let get = await db.friendStatus(otherId, userId);
-
-        // if (rows.length == 0) {
-        //     res.json("Make Friend request");
-        // } else if (rows[0].sender_id == otherId && !rows[0].accepted) {
-        //     res.json("Accept Friendship");
-        // } else if (!rows[0].accepted) {
-        //     res.json("Cancel Friends Request");
-        // } else {
-        //     res.json("end friendship");
-        // }
     } catch (err) {
         console.log("Error on the friends status route: ", err);
     }

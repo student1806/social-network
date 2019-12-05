@@ -4,7 +4,16 @@
     /* background: #808b97; */
 }
 
+/* #####COLOR PALET#####
+#132238 -- Dark Blue. 
+#364e68 ---blue/grey.
+#98ccd3  light blue
+#ebf0f6 cold white.
+
+*/
+
 main {
+    margin: 0;
     background: #808b97;
     display: flex;
     flex-direction: column;
@@ -13,10 +22,35 @@ main {
 }
 
 header {
+    background: #132238;
     display: flex;
     justify-content: space-between;
     height: 100px;
-    margin: 40px;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.link-nav {
+    margin: 10px;
+    color: #ebf0f6;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* .logo {
+    height: 80px;
+    width: auto;
+} */
+
+.avatar {
+    height: 80px;
+    width: 100px;
+    border-radius: 50%;
+    margin: 10px;
 }
 
 .regis-page {
@@ -30,12 +64,6 @@ img {
     width: auto;
 }
 
-.avatar {
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-}
-
 .bio-image {
     height: auto;
     width: 350px;
@@ -44,16 +72,12 @@ img {
 
 .upload-image {
     border: 1px solid black;
-    height: 200px;
-    width: 400px;
+    background: #ebf0f6;
+    height: 300px;
+    width: 200px;
     position: absolute;
-    top: 200px;
-    left: 40%;
-}
-
-.logo {
-    height: 100px;
-    width: auto;
+    top: 100px;
+    right: 0;
 }
 
 button {
