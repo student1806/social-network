@@ -154,6 +154,19 @@ app.post("/friend-status", async (req, res) => {
     }
 });
 
+//Friendship Want to be
+
+app.get("/friends-wannabes", async (req, res) => {
+    const { userId } = req.session;
+    try {
+        //let friendStatus = await db.getFriendList(userId);
+        let { rows } = await db.getFriendList(userId);
+        res.json(rows);
+    } catch (e) {
+        console.log("Error on the friends want to be route: ", e);
+    }
+});
+
 app.post("/upload", uploader.single("file"), s3.upload, async (req, res) => {
     const imageUrl = `${s3Url}${req.file.filename}`;
     try {

@@ -30,7 +30,7 @@ module.exports.getNewUsers = () => {
 
 module.exports.searchUsers = val => {
     return db.query(
-        `SELECT id, firstname, lastname, url FROM users 
+        `SELECT id, firstname, lastname, url FROM users
         WHERE firstname ILIKE $1
         LIMIT 4`,
         [val + "%"]
@@ -62,9 +62,23 @@ module.exports.updateBio = (bio, id) => {
     );
 };
 
+module.exports.getFriendList = userId => {
+    return db.query(
+        `
+        SELECT users.id, firstname, lastname, url, accepted
+        FROM friendships
+        JOIN users
+        ON (accepted = false AND receiver_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND receiver_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND receiver_id = users.id)
+        `,
+        [userId]
+    );
+};
+
 module.exports.friendStatus = (userId, otherId) => {
     return db.query(
-        `SELECT * FROM friendships 
+        `SELECT * FROM friendships
         WHERE (receiver_id = $1 AND sender_id = $2)
         OR (receiver_id = $2 AND sender_id = $1)`,
         [otherId, userId]
@@ -83,7 +97,7 @@ module.exports.friendRequest = (otherId, userId) => {
 module.exports.upDateFriendRequest = (userId, otherId) => {
     return db.query(
         `
-        UPDATE friendships SET accepted= $3 
+        UPDATE friendships SET accepted= $3
         WHERE (receiver_id = $1 AND sender_id = $2)
         OR (receiver_id = $2 AND sender_id = $1)`,
         [otherId, userId, true]
