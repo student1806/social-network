@@ -12,6 +12,9 @@ export default class Header extends Component {
             <header>
                 <img className="logo" src="/images/logo.png" alt="Logo" />
                 <nav>
+                    <Link className="link-nav" to="/friends">
+                        Friends
+                    </Link>
                     <Link className="link-nav" to="/users">
                         Users
                     </Link>

@@ -1,4 +1,3 @@
-// action defenine what state needs to be changed
 export default function reducer(state = {}, action) {
     console.log("state, ", state);
 
@@ -35,11 +34,3 @@ export default function reducer(state = {}, action) {
 
     return state;
 }
-
-// state = {
-//     ...state,
-//     //newStateProp: [...state.myArr, action.newValue]
-//     newStateProp: state.myArr.filter(elem => {
-//         return elem !==1
-//     });
-// }

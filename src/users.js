@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios";
 import { ProfilePic } from "./profile-pic";
+import { Link } from "react-router-dom";
 
 export function FindPeople() {
     const [users, setUsers] = useState([]);
@@ -59,7 +60,9 @@ export function FindPeople() {
                                     imgurl={user.url}
                                     classPic="avatar"
                                 />
-                                {user.firstname} {user.lastname}
+                                <Link to={`/user/${user.id}`}>
+                                    {user.firstname} {user.lastname}
+                                </Link>
                             </div>
                         );
                     })}

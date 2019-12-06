@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import {
     receiveFriendsWannabes,
     unfriend,
@@ -10,8 +11,6 @@ import { ProfilePic } from "./profile-pic";
 export function FriendsList() {
     const dispatch = useDispatch();
     const friends = useSelector(state => {
-        console.log("in function passed to useSelector", state);
-
         return (
             state.friendsAndWannaBes &&
             state.friendsAndWannaBes.filter(elem => elem.accepted == true)
@@ -19,16 +18,11 @@ export function FriendsList() {
     });
 
     const wannabes = useSelector(state => {
-        //console.log("in function passed to useSelector", state);
-
         return (
             state.friendsAndWannaBes &&
             state.friendsAndWannaBes.filter(elem => elem.accepted == false)
         );
     });
-
-    console.log("friends", friends);
-    console.log("wannabes", wannabes);
 
     useEffect(() => {
         dispatch(receiveFriendsWannabes());
@@ -41,8 +35,13 @@ export function FriendsList() {
                 friends.map(user => {
                     return (
                         <div className="user-search" key={user.id}>
-                            <ProfilePic imgurl={user.url} classPic="avatar" />
-                            {user.firstname} {user.lastname}
+                            <Link to={`/user/${user.id}`}>
+                                <ProfilePic
+                                    imgurl={user.url}
+                                    classPic="avatar"
+                                />
+                                {user.firstname} {user.lastname}
+                            </Link>
                             <button onClick={e => dispatch(unfriend(user.id))}>
                                 End Friendship
                             </button>
