@@ -50,37 +50,41 @@ export function FindPeople() {
         <>
             <section>
                 <h3>Find People</h3>
-
-                <p>Check new users</p>
-                {users &&
-                    users.map(user => {
-                        return (
-                            <div className="user-search" key={user.id}>
-                                <ProfilePic
-                                    imgurl={user.url}
-                                    classPic="avatar"
-                                />
-                                <Link to={`/user/${user.id}`}>
-                                    {user.firstname} {user.lastname}
-                                </Link>
-                            </div>
-                        );
-                    })}
-
-                <p>Search for someone?</p>
                 <input onChange={e => setVal(e.target.value)} />
-                {searchUsers &&
-                    searchUsers.map(user => {
-                        return (
-                            <div className="user-search" key={user.id}>
-                                <ProfilePic
-                                    imgurl={user.url}
-                                    classPic="avatar"
-                                />
-                                {user.firstname} {user.lastname}
-                            </div>
-                        );
-                    })}
+                <div className="friends-grid">
+                    {searchUsers &&
+                        searchUsers.map(user => {
+                            return (
+                                <div className="user-search" key={user.id}>
+                                    <ProfilePic
+                                        imgurl={user.url}
+                                        classPic="avatar"
+                                    />
+                                    <Link to={`/user/${user.id}`}>
+                                        {user.firstname} {user.lastname}
+                                    </Link>
+                                </div>
+                            );
+                        })}
+                </div>
+
+                <h3>Check new users</h3>
+                <div className="friends-grid">
+                    {users &&
+                        users.map(user => {
+                            return (
+                                <div className="user-search" key={user.id}>
+                                    <ProfilePic
+                                        imgurl={user.url}
+                                        classPic="avatar"
+                                    />
+                                    <Link to={`/user/${user.id}`}>
+                                        {user.firstname} {user.lastname}
+                                    </Link>
+                                </div>
+                            );
+                        })}
+                </div>
             </section>
         </>
     );
