@@ -10,7 +10,9 @@ export default class Header extends Component {
     render() {
         return (
             <header>
-                <img className="logo" src="/images/logo.png" alt="Logo" />
+                <Link to="/">
+                    <img className="logo" src="/images/logo.png" alt="Logo" />
+                </Link>
                 <nav>
                     <Link className="link-nav" to="/friends">
                         Friends
@@ -31,6 +33,3 @@ export default class Header extends Component {
         );
     }
 }
-
-// Move the profile pic to the header and pass a dinamict class props className
-//props.ProfilePicClass

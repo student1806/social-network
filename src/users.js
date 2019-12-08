@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "./axios";
-import { ProfilePic } from "./profile-pic";
-import { Link } from "react-router-dom";
+import { ProfileCard } from "./profile-card";
 
 export function FindPeople() {
     const [users, setUsers] = useState([]);
@@ -13,7 +12,6 @@ export function FindPeople() {
             try {
                 const { data } = await axios.get("/api/users/");
                 setUsers(data);
-                //console.log("new users data; ", data.newUsers);
             } catch (error) {
                 console.log("Error on the latest people route: ", error);
             }
@@ -21,8 +19,6 @@ export function FindPeople() {
     }, []);
 
     useEffect(() => {
-        //console.log("searchUsers: ", searchUsers);
-
         let ignore = false;
         if (val == "") {
             setSearchUsers([]);
@@ -55,15 +51,14 @@ export function FindPeople() {
                     {searchUsers &&
                         searchUsers.map(user => {
                             return (
-                                <div className="user-search" key={user.id}>
-                                    <ProfilePic
+                                <>
+                                    <ProfileCard
                                         imgurl={user.url}
-                                        classPic="avatar"
+                                        firstname={user.firstname}
+                                        lastname={user.lastname}
+                                        userId={user.id}
                                     />
-                                    <Link to={`/user/${user.id}`}>
-                                        {user.firstname} {user.lastname}
-                                    </Link>
-                                </div>
+                                </>
                             );
                         })}
                 </div>
@@ -73,15 +68,14 @@ export function FindPeople() {
                     {users &&
                         users.map(user => {
                             return (
-                                <div className="user-search" key={user.id}>
-                                    <ProfilePic
+                                <>
+                                    <ProfileCard
                                         imgurl={user.url}
-                                        classPic="avatar"
+                                        firstname={user.firstname}
+                                        lastname={user.lastname}
+                                        userId={user.id}
                                     />
-                                    <Link to={`/user/${user.id}`}>
-                                        {user.firstname} {user.lastname}
-                                    </Link>
-                                </div>
+                                </>
                             );
                         })}
                 </div>
