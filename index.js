@@ -106,7 +106,7 @@ app.get("/user.json/:id", async (req, res) => {
     }
 });
 
-app.get("/api/users/", async (req, res) => {
+app.get("/api/find-users/", async (req, res) => {
     try {
         let { rows } = await db.getNewUsers();
         res.json(rows);

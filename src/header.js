@@ -17,8 +17,8 @@ export default class Header extends Component {
                     <Link className="link-nav" to="/friends">
                         Friends
                     </Link>
-                    <Link className="link-nav" to="/users">
-                        Users
+                    <Link className="link-nav" to="/find-people">
+                        Find People
                     </Link>
                     <a className="link-nav" href="/logout">
                         Logout

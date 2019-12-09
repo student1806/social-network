@@ -7,6 +7,7 @@ import {
     acceptFriendRequest
 } from "./actions";
 import { ProfilePic } from "./profile-pic";
+import { ProfileCard } from "./profile-card";
 
 export function FriendsList() {
     const dispatch = useDispatch();
@@ -35,26 +36,18 @@ export function FriendsList() {
                 {friends &&
                     friends.map(user => {
                         return (
-                            <div className="user-search" key={user.id}>
-                                <Link to={`/user/${user.id}`}>
-                                    <ProfilePic
-                                        imgurl={user.url}
-                                        classPic="avatar"
-                                    />
-                                </Link>
-                                <div>
-                                    <h3>
-                                        {user.firstname} {user.lastname}
-                                    </h3>
-
-                                    <button
-                                        onClick={e =>
-                                            dispatch(unfriend(user.id))
-                                        }
-                                    >
-                                        End Friendship
-                                    </button>
-                                </div>
+                            <div key={user.id}>
+                                <ProfileCard
+                                    imgurl={user.url}
+                                    firstname={user.firstname}
+                                    lastname={user.lastname}
+                                    userId={user.id}
+                                />
+                                <button
+                                    onClick={e => dispatch(unfriend(user.id))}
+                                >
+                                    End Friendship
+                                </button>
                             </div>
                         );
                     })}
@@ -64,27 +57,20 @@ export function FriendsList() {
                 {wannabes &&
                     wannabes.map(user => {
                         return (
-                            <div className="user-search" key={user.id}>
-                                <Link to={`/user/${user.id}`}>
-                                    <ProfilePic
-                                        imgurl={user.url}
-                                        classPic="avatar"
-                                    />
-                                </Link>
-                                <div>
-                                    <h3>
-                                        {user.firstname} {user.lastname}
-                                    </h3>
-                                    <button
-                                        onClick={e =>
-                                            dispatch(
-                                                acceptFriendRequest(user.id)
-                                            )
-                                        }
-                                    >
-                                        Accept Friendship
-                                    </button>
-                                </div>
+                            <div key={user.id}>
+                                <ProfileCard
+                                    imgurl={user.url}
+                                    firstname={user.firstname}
+                                    lastname={user.lastname}
+                                    userId={user.id}
+                                />
+                                <button
+                                    onClick={e =>
+                                        dispatch(acceptFriendRequest(user.id))
+                                    }
+                                >
+                                    Accept Friendship
+                                </button>
                             </div>
                         );
                     })}
@@ -92,3 +78,36 @@ export function FriendsList() {
         </>
     );
 }
+// <div className="user-search" key={user.id}>
+//     <Link to={`/user/${user.id}`}>
+//         <ProfilePic
+//             imgurl={user.url}
+//             classPic="avatar"
+//         />
+//     </Link>
+//     <div>
+//         <h3>
+//             {user.firstname} {user.lastname}
+//         </h3>
+
+//         <button
+//             onClick={e =>
+//                 dispatch(unfriend(user.id))
+//             }
+//         >
+//             End Friendship
+//         </button>
+//     </div>
+// </div>
+
+// <div className="user-search" key={user.id}>
+//     <Link to={`/user/${user.id}`}>
+//         <ProfilePic
+//             imgurl={user.url}
+//             classPic="avatar"
+//         />
+//     </Link>
+//     <div>
+//         <h3>
+//             {user.firstname} {user.lastname}
+//         </h3>

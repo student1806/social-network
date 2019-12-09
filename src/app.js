@@ -89,7 +89,7 @@ export default class App extends Component {
                             )}
                         />
                     </>
-                    <Route path="/users/" component={FindPeople} />
+                    <Route path="/find-people/" component={FindPeople} />
                     <Route path="/friends/" component={FriendsList} />
                 </BrowserRouter>
                 {this.state.uploaderIsVisible && (

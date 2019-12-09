@@ -10,7 +10,7 @@ export function FindPeople() {
     useEffect(() => {
         (async () => {
             try {
-                const { data } = await axios.get("/api/users/");
+                const { data } = await axios.get("/api/find-users/");
                 setUsers(data);
             } catch (error) {
                 console.log("Error on the latest people route: ", error);
@@ -51,14 +51,14 @@ export function FindPeople() {
                     {searchUsers &&
                         searchUsers.map(user => {
                             return (
-                                <>
+                                <div key={user.id}>
                                     <ProfileCard
                                         imgurl={user.url}
                                         firstname={user.firstname}
                                         lastname={user.lastname}
                                         userId={user.id}
                                     />
-                                </>
+                                </div>
                             );
                         })}
                 </div>
@@ -68,14 +68,14 @@ export function FindPeople() {
                     {users &&
                         users.map(user => {
                             return (
-                                <>
+                                <div key={user.id}>
                                     <ProfileCard
                                         imgurl={user.url}
                                         firstname={user.firstname}
                                         lastname={user.lastname}
                                         userId={user.id}
                                     />
-                                </>
+                                </div>
                             );
                         })}
                 </div>

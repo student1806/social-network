@@ -7,7 +7,9 @@ export function ProfileCard({ userId, imgurl, firstname, lastname }) {
         <div className="user-search" key={userId}>
             <ProfilePic imgurl={imgurl} classPic="avatar" />
             <Link to={`/user/${userId}`}>
-                {firstname} {lastname}
+                <h3>
+                    {firstname} {lastname}
+                </h3>
             </Link>
         </div>
     );
