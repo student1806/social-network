@@ -14,7 +14,7 @@ export async function acceptFriendRequest(otherId) {
         otherId,
         buttonText: "Accept Friendship"
     });
-    console.log(data);
+    //console.log(data);
     return {
         type: "ACCEPT_FRIEND_REQUEST",
         id: otherId
@@ -26,9 +26,26 @@ export async function unfriend(otherId) {
         otherId,
         buttonText: "End Friendship"
     });
-    console.log(data);
+    //console.log(data);
     return {
         type: "UNFRIEND",
         id: otherId
+    };
+}
+
+export async function chatMessages(msgs) {
+    return {
+        type: "GET_MESSAGES",
+        msgs
+    };
+    //do stuff here
+    //console.log("messages: ", msgs);
+}
+
+export async function chatMessage(msg) {
+    console.log("message: ", msg);
+    return {
+        type: "GET_MESSAGE",
+        msg
     };
 }

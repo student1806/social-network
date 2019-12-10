@@ -31,6 +31,18 @@ export default function reducer(state = {}, action) {
             })
         };
     }
-
+    if (action.type === "GET_MESSAGES") {
+        state = {
+            ...state,
+            msgs: action.msgs
+        };
+    }
+    if (action.type === "GET_MESSAGE") {
+        console.log("I am herer", action.msg);
+        state = {
+            ...state,
+            msgs: [...state.msgs, action.msg]
+        };
+    }
     return state;
 }

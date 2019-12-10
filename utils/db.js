@@ -113,3 +113,34 @@ module.exports.deleteFriendRequest = (userId, otherId) => {
         [otherId, userId]
     );
 };
+
+module.exports.getLastTenChatMessages = () => {
+    return db.query(
+        `SELECT firstname, lastname, url, message, messages.id FROM messages
+        JOIN users
+        ON sender_id = users.id
+        ORDER BY messages.created_at DESC
+        LIMIT 10`
+    );
+};
+
+module.exports.addNewChatMessage = (id, message) => {
+    return db.query(
+        `INSERT INTO messages (sender_id, message)
+        VALUES ($1, $2)
+        RETURNING *`,
+        [id, message]
+    );
+};
+
+module.exports.getNewChatmessage = () => {
+    return db.query(
+        `
+        SELECT firstname, lastname, url, message, users.id FROM messages
+        JOIN users
+        ON sender_id = users.id
+        ORDER BY messages.created_at DESC
+        LIMIT 1
+        `
+    );
+};

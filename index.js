@@ -213,25 +213,28 @@ server.listen(8080, () =>
     console.log("I'm listenig social network on port 8080")
 );
 
-io.on("connection", function(socket) {
+io.on("connection", async socket => {
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
     const userId = socket.request.session.userId;
 
-    /* chat message stuff*/
-    //make a db query to get the last 10 chat messages
+    try {
+        const { rows } = await db.getLastTenChatMessages();
+        console.log("messages rows; ", rows);
+        io.sockets.emit("chatMessages", rows.reverse());
+    } catch (e) {
+        console.log("error on the get last 10 messages: ", e);
+    }
 
-    // const {rows} = await db.getLastTenChatMessages;
-    //     // now we need to emit to the fronm send
-    //     io.socket.emit("chatMessages", rows.reverse());
+    socket.on("chatMessage", async msg => {
+        try {
+            await db.addNewChatMessage(userId, msg);
+            const { rows } = await db.getNewChatmessage();
 
-    socket.on("newMessage", msg => {
-        console.log("msg on the server: ", msg);
-        console.log("userId: ", userId);
-        // we need to look info about the user
-        //then add it to the databases
-        // the emit to everybody else.
-        socket.emit("something", msg);
+            io.emit("chatMessage", rows[0]);
+        } catch (e) {
+            console.log("Error on the inserting new message to db, ", e);
+        }
     });
 });
