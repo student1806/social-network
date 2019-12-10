@@ -16,11 +16,16 @@ const store = createStore(
 );
 //////////////
 
+//Instant chat
+import { init } from "./socket";
+
 let element = "";
 
 if (location.pathname == "/welcome") {
     element = <Welcome />;
 } else {
+    //socket connection for logged-in users
+    init(store);
     element = (
         <Provider store={store}>
             <App />

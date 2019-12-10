@@ -11,7 +11,10 @@ const db = require("./utils/db");
 const secret = require("./secrets");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
-// const { hash, compare } = require("./utils/bc");
+//Socket io related
+const server = require("http").Server(app);
+const io = require("socket.io")(server, { origins: "localhost:8080" });
+//////////
 const {
     updateRequestFriendship,
     getFriendStatus
@@ -39,12 +42,16 @@ const uploader = multer({
     }
 });
 
-app.use(
-    cookieSession({
-        secret: secret.cookieSecret,
-        maxAge: 1000 * 60 * 60 * 24 * 14
-    })
-);
+// secret.cookieSecret,
+const cookieSessionMiddleware = cookieSession({
+    secret: secret.cookieSecret,
+    maxAge: 1000 * 60 * 60 * 24 * 90
+});
+
+app.use(cookieSessionMiddleware);
+io.use(function(socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 app.use(csurf());
 
@@ -202,6 +209,29 @@ app.get("*", function(req, res) {
     }
 });
 
-app.listen(8080, function() {
-    console.log("I'm listening.");
+server.listen(8080, () =>
+    console.log("I'm listenig social network on port 8080")
+);
+
+io.on("connection", function(socket) {
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+    const userId = socket.request.session.userId;
+
+    /* chat message stuff*/
+    //make a db query to get the last 10 chat messages
+
+    // const {rows} = await db.getLastTenChatMessages;
+    //     // now we need to emit to the fronm send
+    //     io.socket.emit("chatMessages", rows.reverse());
+
+    socket.on("newMessage", msg => {
+        console.log("msg on the server: ", msg);
+        console.log("userId: ", userId);
+        // we need to look info about the user
+        //then add it to the databases
+        // the emit to everybody else.
+        socket.emit("something", msg);
+    });
 });
