@@ -1,6 +1,4 @@
 export default function reducer(state = {}, action) {
-    console.log("state, ", state);
-
     if (action.type == "RECEIVE_FRIENDS_WANNABES") {
         state = {
             ...state,
@@ -38,7 +36,6 @@ export default function reducer(state = {}, action) {
         };
     }
     if (action.type === "GET_MESSAGE") {
-        console.log("I am herer", action.msg);
         state = {
             ...state,
             msgs: [...state.msgs, action.msg]

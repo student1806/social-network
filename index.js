@@ -221,7 +221,6 @@ io.on("connection", async socket => {
 
     try {
         const { rows } = await db.getLastTenChatMessages();
-        console.log("messages rows; ", rows);
         io.sockets.emit("chatMessages", rows.reverse());
     } catch (e) {
         console.log("error on the get last 10 messages: ", e);
