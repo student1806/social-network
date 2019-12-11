@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { ProfileChat } from "./profile-card";
+import { ProfileChat, ProfileOnline } from "./profile-card";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
 
@@ -8,6 +8,7 @@ export function Chat() {
     const chatMessages = useSelector(state => state && state.msgs);
     const onlineUsers = useSelector(state => state && state.onlineUsers);
     console.log("onlineUsers in chat.js: ", onlineUsers);
+    console.log("chatMessages in chat.js: ", chatMessages);
 
     useEffect(() => {
         elemRef.current.scrollTop =
@@ -22,31 +23,50 @@ export function Chat() {
     };
 
     return (
-        <div className="chat">
-            <h1>Chat room</h1>
-            <div className="chat-container" ref={elemRef}>
-                {chatMessages &&
-                    chatMessages.map(msg => {
-                        return (
-                            <div key={msg.id}>
-                                <ProfileChat
-                                    imgurl={msg.url}
-                                    firstname={msg.firstname}
-                                    lastname={msg.lastname}
-                                    userId={msg.id}
-                                    message={msg.message}
-                                    time={msg.created_at}
-                                />
-                            </div>
-                        );
-                    })}
+        <div className="chat-wrapper">
+            <div>
+                <h1>Online</h1>
+                <div className="online-list">
+                    {onlineUsers &&
+                        onlineUsers.map(user => {
+                            return (
+                                <div className="mini-card" key={user.id}>
+                                    <ProfileOnline
+                                        imgurl={user.url}
+                                        firstname={user.firstname}
+                                        lastname={user.lastname}
+                                    />
+                                </div>
+                            );
+                        })}
+                </div>
             </div>
-            <textarea
-                rows="5"
-                cols="50"
-                placeholder="Add message here..."
-                onKeyUp={keyCheck}
-            ></textarea>
+            <div className="chat">
+                <h1>Chat room</h1>
+                <div className="chat-container" ref={elemRef}>
+                    {chatMessages &&
+                        chatMessages.map(msg => {
+                            return (
+                                <div key={msg.id}>
+                                    <ProfileChat
+                                        imgurl={msg.url}
+                                        firstname={msg.firstname}
+                                        lastname={msg.lastname}
+                                        userId={msg.id}
+                                        message={msg.message}
+                                        time={msg.created_at}
+                                    />
+                                </div>
+                            );
+                        })}
+                </div>
+                <textarea
+                    rows="5"
+                    cols="50"
+                    placeholder="Add message here..."
+                    onKeyUp={keyCheck}
+                ></textarea>
+            </div>
         </div>
     );
 }

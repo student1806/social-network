@@ -220,11 +220,26 @@ io.on("connection", async socket => {
     }
     const { userId } = socket.request.session;
     onlineUsers[socket.id] = userId;
-    socket.emit("onlineUsers", onlineUsers);
+    const usersId = Object.values(onlineUsers);
+    //console.log("usersId: ", usersId);
 
-    socket.on("disconnect", () => {
+    //db query for the users name and image url
+    try {
+        const { rows } = await db.getOnlineUsers(usersId);
+        io.emit("onlineUsers", rows);
+    } catch (e) {
+        console.log("Error on the get online users query: ", e);
+    }
+
+    socket.on("disconnect", async () => {
         delete onlineUsers[socket.id];
-        //console.log("deleted onlineUsers: ", onlineUsers);
+        const offlineId = Object.values(onlineUsers);
+        try {
+            const { rows } = await db.getOnlineUsers(offlineId);
+            io.emit("disconnect", rows);
+        } catch (e) {
+            console.log("Error on the get offline users query: ", e);
+        }
     });
 
     try {

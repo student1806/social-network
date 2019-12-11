@@ -42,3 +42,14 @@ export function ProfileChat({
         </div>
     );
 }
+
+export function ProfileOnline({ imgurl, firstname, lastname }) {
+    return (
+        <>
+            <ProfilePic imgurl={imgurl} classPic="mini-avatar" />
+            <p>
+                {firstname} {lastname}
+            </p>
+        </>
+    );
+}

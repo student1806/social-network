@@ -51,3 +51,10 @@ export function onlineUsers(users) {
         onlineUsers: users
     };
 }
+
+export function offlineUsers(users) {
+    return {
+        type: "UPDATE_USERS",
+        onlineUsers: users
+    };
+}

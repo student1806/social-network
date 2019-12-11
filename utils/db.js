@@ -144,3 +144,13 @@ module.exports.getNewChatmessage = () => {
         `
     );
 };
+
+module.exports.getOnlineUsers = users => {
+    return db.query(
+        `
+        SELECT * FROM users
+        WHERE id = ANY($1);
+        `,
+        [users]
+    );
+};

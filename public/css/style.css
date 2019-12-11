@@ -34,6 +34,7 @@ nav {
     justify-content: space-around;
     align-items: center;
 }
+
 .link-nav {
     margin: 10px;
     color: #ebf0f6;
@@ -190,6 +191,31 @@ button {
     align-self: flex-start;
 }
 /* ##################################CHAT PAGE #######################*/
+.chat-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.online-list {
+    height: 400px;
+    width: 200px;
+    background: white;
+}
+
+.mini-card {
+    display: flex;
+    align-items: center;
+    background: #ebf0f6;
+    border-radius: 10px;
+    margin: 3px;
+}
+
+.mini-avatar {
+    height: 60px;
+    width: 50px;
+    border-radius: 50%;
+    background: white;
+}
 .chat {
     display: flex;
     flex-direction: column;

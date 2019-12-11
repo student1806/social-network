@@ -48,5 +48,14 @@ export default function reducer(state = {}, action) {
             onlineUsers: action.onlineUsers
         };
     }
+
+    if (action.type === "UPDATE_USERS") {
+        state = {
+            ...state,
+            onlineUsers: state.onlineUsers.filter(user => {
+                return action.onlineUsers != user;
+            })
+        };
+    }
     return state;
 }

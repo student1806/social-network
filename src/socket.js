@@ -16,6 +16,10 @@ export const init = store => {
             store.dispatch(onlineUsers(users));
         });
 
+        socket.on("disconnect", users => {
+            store.dispatch(onlineUsers(users));
+        });
+
         socket.on("chatMessages", msgs => {
             store.dispatch(chatMessages(msgs));
         });
