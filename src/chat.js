@@ -1,11 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import { ProfileCard, ProfileChat } from "./profile-card";
+import { ProfileChat } from "./profile-card";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
 
 export function Chat() {
     const elemRef = useRef();
     const chatMessages = useSelector(state => state && state.msgs);
+    const onlineUsers = useSelector(state => state && state.onlineUsers);
+    console.log("onlineUsers in chat.js: ", onlineUsers);
 
     useEffect(() => {
         elemRef.current.scrollTop =

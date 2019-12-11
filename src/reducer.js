@@ -41,5 +41,12 @@ export default function reducer(state = {}, action) {
             msgs: [...state.msgs, action.msg]
         };
     }
+
+    if (action.type === "GET_USERS") {
+        state = {
+            ...state,
+            onlineUsers: action.onlineUsers
+        };
+    }
     return state;
 }

@@ -34,7 +34,7 @@ export function ProfileChat({
                         {firstname} {lastname}
                     </h3>
                     <p className="time">
-                        {moment(time).format("MMM Do YY, h:mm")}
+                        {moment(time).format("MMM Do YY, HH:mm")}
                     </p>
                 </div>
                 <p>{message}</p>

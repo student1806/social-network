@@ -44,3 +44,10 @@ export async function chatMessage(msg) {
         msg
     };
 }
+
+export function onlineUsers(users) {
+    return {
+        type: "GET_USERS",
+        onlineUsers: users
+    };
+}

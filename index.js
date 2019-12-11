@@ -213,11 +213,19 @@ server.listen(8080, () =>
     console.log("I'm listenig social network on port 8080")
 );
 
+const onlineUsers = {};
 io.on("connection", async socket => {
     if (!socket.request.session.userId) {
         return socket.disconnect(true);
     }
-    const userId = socket.request.session.userId;
+    const { userId } = socket.request.session;
+    onlineUsers[socket.id] = userId;
+    socket.emit("onlineUsers", onlineUsers);
+
+    socket.on("disconnect", () => {
+        delete onlineUsers[socket.id];
+        //console.log("deleted onlineUsers: ", onlineUsers);
+    });
 
     try {
         const { rows } = await db.getLastTenChatMessages();
