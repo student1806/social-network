@@ -189,8 +189,42 @@ button {
     cursor: pointer;
     align-self: flex-start;
 }
+/* ##################################CHAT PAGE #######################*/
+.chat {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
 
 .chat-container {
-    height: 300px;
+    height: 400px;
+    width: 600px;
     overflow-y: scroll;
+    background: white;
+}
+
+.user-chat {
+    display: flex;
+    border-radius: 10px;
+    margin: 3px;
+    background: #ebf0f6;
+}
+
+.msg-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+    width: 450px;
+}
+
+.chat-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.time {
+    color: grey;
+    font-size: 12px;
 }

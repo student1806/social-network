@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { ProfileCard } from "./profile-card";
+import { ProfileCard, ProfileChat } from "./profile-card";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
 
@@ -27,13 +27,14 @@ export function Chat() {
                     chatMessages.map(msg => {
                         return (
                             <div key={msg.id}>
-                                <ProfileCard
+                                <ProfileChat
                                     imgurl={msg.url}
                                     firstname={msg.firstname}
                                     lastname={msg.lastname}
                                     userId={msg.id}
+                                    message={msg.message}
+                                    time={msg.created_at}
                                 />
-                                <p>{msg.message}</p>
                             </div>
                         );
                     })}

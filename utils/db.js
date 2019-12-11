@@ -116,7 +116,7 @@ module.exports.deleteFriendRequest = (userId, otherId) => {
 
 module.exports.getLastTenChatMessages = () => {
     return db.query(
-        `SELECT firstname, lastname, url, message, messages.id FROM messages
+        `SELECT firstname, lastname, url, message, messages.id, messages.created_at FROM messages
         JOIN users
         ON sender_id = users.id
         ORDER BY messages.created_at DESC
@@ -136,7 +136,7 @@ module.exports.addNewChatMessage = (id, message) => {
 module.exports.getNewChatmessage = () => {
     return db.query(
         `
-        SELECT firstname, lastname, url, message, users.id FROM messages
+        SELECT firstname, lastname, url, message, users.id, messages.created_at FROM messages
         JOIN users
         ON sender_id = users.id
         ORDER BY messages.created_at DESC
