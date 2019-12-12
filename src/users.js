@@ -44,7 +44,7 @@ export function FindPeople() {
 
     return (
         <>
-            <section>
+            <div className="friends-wrapper">
                 <h3>Find People</h3>
                 <input onChange={e => setVal(e.target.value)} />
                 <div className="friends-grid">
@@ -62,7 +62,8 @@ export function FindPeople() {
                             );
                         })}
                 </div>
-
+            </div>
+            <div className="friends-wrapper">
                 <h3>Check new users</h3>
                 <div className="friends-grid">
                     {users &&
@@ -79,7 +80,7 @@ export function FindPeople() {
                             );
                         })}
                 </div>
-            </section>
+            </div>
         </>
     );
 }

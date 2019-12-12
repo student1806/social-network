@@ -145,9 +145,8 @@ app.get("/friend-status/:otherId", async (req, res) => {
 });
 
 app.post("/friend-status", async (req, res) => {
-    const { otherId } = req.body;
+    const { otherId, buttonText } = req.body;
     const { userId } = req.session;
-    const { buttonText } = req.body;
 
     try {
         let updateBtn = await updateRequestFriendship(

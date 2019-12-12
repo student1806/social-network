@@ -31,49 +31,57 @@ export function FriendsList() {
 
     return (
         <>
-            <h4>Friends List</h4>
-            <div className="friends-grid">
-                {friends &&
-                    friends.map(user => {
-                        return (
-                            <div key={user.id}>
-                                <ProfileCard
-                                    imgurl={user.url}
-                                    firstname={user.firstname}
-                                    lastname={user.lastname}
-                                    userId={user.id}
-                                />
-                                <button
-                                    onClick={e => dispatch(unfriend(user.id))}
-                                >
-                                    End Friendship
-                                </button>
-                            </div>
-                        );
-                    })}
+            <div className="friends-wrapper">
+                <h4>Friends List</h4>
+                <div className="friends-grid">
+                    {friends &&
+                        friends.map(user => {
+                            return (
+                                <div key={user.id}>
+                                    <ProfileCard
+                                        imgurl={user.url}
+                                        firstname={user.firstname}
+                                        lastname={user.lastname}
+                                        userId={user.id}
+                                    />
+                                    <button
+                                        onClick={e =>
+                                            dispatch(unfriend(user.id))
+                                        }
+                                    >
+                                        End Friendship
+                                    </button>
+                                </div>
+                            );
+                        })}
+                </div>
             </div>
-            <h4>Friendship Request</h4>
-            <div className="friends-grid">
-                {wannabes &&
-                    wannabes.map(user => {
-                        return (
-                            <div key={user.id}>
-                                <ProfileCard
-                                    imgurl={user.url}
-                                    firstname={user.firstname}
-                                    lastname={user.lastname}
-                                    userId={user.id}
-                                />
-                                <button
-                                    onClick={e =>
-                                        dispatch(acceptFriendRequest(user.id))
-                                    }
-                                >
-                                    Accept Friendship
-                                </button>
-                            </div>
-                        );
-                    })}
+            <div className="friends-wrapper">
+                <h4>Friendship Request</h4>
+                <div className="friends-grid">
+                    {wannabes &&
+                        wannabes.map(user => {
+                            return (
+                                <div key={user.id}>
+                                    <ProfileCard
+                                        imgurl={user.url}
+                                        firstname={user.firstname}
+                                        lastname={user.lastname}
+                                        userId={user.id}
+                                    />
+                                    <button
+                                        onClick={e =>
+                                            dispatch(
+                                                acceptFriendRequest(user.id)
+                                            )
+                                        }
+                                    >
+                                        Accept Friendship
+                                    </button>
+                                </div>
+                            );
+                        })}
+                </div>
             </div>
         </>
     );

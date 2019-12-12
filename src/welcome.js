@@ -11,7 +11,7 @@ export default class Welcome extends Component {
     render() {
         return (
             <div className="regis-page">
-                <h1> Welcome to my Social network Page </h1>
+                <h1 className="title"> The Circle Network </h1>
                 <img src="/images/logo.png" />
                 <HashRouter>
                     <>

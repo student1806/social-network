@@ -12,11 +12,6 @@ export class BioEditor extends React.Component {
 
     componentDidMount() {
         console.log("propros in the bio editor ", this.props);
-        // if (!this.props.bio) {
-        //     this.setState({
-        //         buttonText: "add your bio"
-        //     });
-        // }
     }
 
     openText() {
@@ -39,7 +34,6 @@ export class BioEditor extends React.Component {
                     bio: res.data.bio,
                     editingMode: false
                 });
-                //console.log(this.state.bio);
                 this.props.upDateBio(res.data.bio);
             })
             .catch(err => {
