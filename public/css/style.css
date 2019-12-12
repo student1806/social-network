@@ -193,13 +193,13 @@ button {
 /* ##################################CHAT PAGE #######################*/
 .chat-wrapper {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    margin: 10px;
 }
 
 .online-list {
-    height: 400px;
     width: 200px;
-    background: white;
+    margin-top: 10px;
 }
 
 .mini-card {
@@ -227,6 +227,7 @@ button {
     width: 600px;
     overflow-y: scroll;
     background: white;
+    margin-top: 10px;
 }
 
 .user-chat {

@@ -25,7 +25,7 @@ export function Chat() {
     return (
         <div className="chat-wrapper">
             <div>
-                <h1>Online</h1>
+                <h3>Online</h3>
                 <div className="online-list">
                     {onlineUsers &&
                         onlineUsers.map(user => {
@@ -42,7 +42,7 @@ export function Chat() {
                 </div>
             </div>
             <div className="chat">
-                <h1>Chat room</h1>
+                <h2>Chat room</h2>
                 <div className="chat-container" ref={elemRef}>
                     {chatMessages &&
                         chatMessages.map(msg => {
