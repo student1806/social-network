@@ -220,9 +220,7 @@ io.on("connection", async socket => {
     const { userId } = socket.request.session;
     onlineUsers[socket.id] = userId;
     const usersId = Object.values(onlineUsers);
-    //console.log("usersId: ", usersId);
 
-    //db query for the users name and image url
     try {
         const { rows } = await db.getOnlineUsers(usersId);
         io.emit("onlineUsers", rows);

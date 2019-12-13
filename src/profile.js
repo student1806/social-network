@@ -4,7 +4,7 @@ import { BioEditor } from "./bio-editor";
 
 export let bioCard = {
     height: 400,
-    width: 600,
+    width: 700,
     display: "flex",
     justifyContent: "space-around",
     margin: 40,
