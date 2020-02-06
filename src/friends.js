@@ -29,93 +29,45 @@ export function FriendsList() {
         dispatch(receiveFriendsWannabes());
     }, []);
 
+    const friendsList = (relation, status, buttonText) => {
+        return (
+            relation &&
+            relation.map(user => {
+                return (
+                    <div key={user.id}>
+                        <ProfileCard
+                            imgurl={user.url}
+                            firstname={user.firstname}
+                            lastname={user.lastname}
+                            userId={user.id}
+                        />
+                        <button onClick={e => dispatch(status(user.id))}>
+                            {buttonText}
+                        </button>
+                    </div>
+                );
+            })
+        );
+    };
+
     return (
         <>
             <div className="friends-wrapper">
                 <h4>Friends List</h4>
                 <div className="friends-grid">
-                    {friends &&
-                        friends.map(user => {
-                            return (
-                                <div key={user.id}>
-                                    <ProfileCard
-                                        imgurl={user.url}
-                                        firstname={user.firstname}
-                                        lastname={user.lastname}
-                                        userId={user.id}
-                                    />
-                                    <button
-                                        onClick={e =>
-                                            dispatch(unfriend(user.id))
-                                        }
-                                    >
-                                        End Friendship
-                                    </button>
-                                </div>
-                            );
-                        })}
+                    {friendsList(friends, unfriend, "End Friendship")}
                 </div>
             </div>
             <div className="friends-wrapper">
                 <h4>Friendship Request</h4>
                 <div className="friends-grid">
-                    {wannabes &&
-                        wannabes.map(user => {
-                            return (
-                                <div key={user.id}>
-                                    <ProfileCard
-                                        imgurl={user.url}
-                                        firstname={user.firstname}
-                                        lastname={user.lastname}
-                                        userId={user.id}
-                                    />
-                                    <button
-                                        onClick={e =>
-                                            dispatch(
-                                                acceptFriendRequest(user.id)
-                                            )
-                                        }
-                                    >
-                                        Accept Friendship
-                                    </button>
-                                </div>
-                            );
-                        })}
+                    {friendsList(
+                        wannabes,
+                        acceptFriendRequest,
+                        "Accept Friendship"
+                    )}
                 </div>
             </div>
         </>
     );
 }
-// <div className="user-search" key={user.id}>
-//     <Link to={`/user/${user.id}`}>
-//         <ProfilePic
-//             imgurl={user.url}
-//             classPic="avatar"
-//         />
-//     </Link>
-//     <div>
-//         <h3>
-//             {user.firstname} {user.lastname}
-//         </h3>
-
-//         <button
-//             onClick={e =>
-//                 dispatch(unfriend(user.id))
-//             }
-//         >
-//             End Friendship
-//         </button>
-//     </div>
-// </div>
-
-// <div className="user-search" key={user.id}>
-//     <Link to={`/user/${user.id}`}>
-//         <ProfilePic
-//             imgurl={user.url}
-//             classPic="avatar"
-//         />
-//     </Link>
-//     <div>
-//         <h3>
-//             {user.firstname} {user.lastname}
-//         </h3>
