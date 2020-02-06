@@ -42,44 +42,31 @@ export function FindPeople() {
         return null;
     }
 
+    const userList = users => {
+        return users.map(user => {
+            return (
+                <div key={user.id}>
+                    <ProfileCard
+                        imgurl={user.url}
+                        firstname={user.firstname}
+                        lastname={user.lastname}
+                        userId={user.id}
+                    />
+                </div>
+            );
+        });
+    };
+
     return (
         <>
             <div className="friends-wrapper">
                 <h3>Find People</h3>
                 <input onChange={e => setVal(e.target.value)} />
-                <div className="friends-grid">
-                    {searchUsers &&
-                        searchUsers.map(user => {
-                            return (
-                                <div key={user.id}>
-                                    <ProfileCard
-                                        imgurl={user.url}
-                                        firstname={user.firstname}
-                                        lastname={user.lastname}
-                                        userId={user.id}
-                                    />
-                                </div>
-                            );
-                        })}
-                </div>
+                <div className="friends-grid"> {userList(searchUsers)}</div>
             </div>
             <div className="friends-wrapper">
                 <h3>Check new users</h3>
-                <div className="friends-grid">
-                    {users &&
-                        users.map(user => {
-                            return (
-                                <div key={user.id}>
-                                    <ProfileCard
-                                        imgurl={user.url}
-                                        firstname={user.firstname}
-                                        lastname={user.lastname}
-                                        userId={user.id}
-                                    />
-                                </div>
-                            );
-                        })}
-                </div>
+                <div className="friends-grid"> {userList(users)}</div>
             </div>
         </>
     );
