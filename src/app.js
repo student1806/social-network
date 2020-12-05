@@ -21,7 +21,7 @@ export default class App extends Component {
     }
     async componentDidMount() {
         try {
-            let { data } = await axios.get("/user.json");
+            let { data } = await axios.get("/api/user");
             this.setState({
                 firstname: data.userInfo.firstname,
                 lastname: data.userInfo.lastname,

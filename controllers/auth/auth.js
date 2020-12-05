@@ -1,8 +1,11 @@
-const app = require("./index");
-const db = require("./utils/db");
-const { hash, compare } = require("./utils/bc");
+//const app = require("./index");
+const express = require('express');
+const router =  express.Router();
+const db = require("../../utils/db");
+const { hash, compare } = require("../../utils/bc");
 
-app.post("/login", async (req, res) => {
+
+router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     try {
         let { rows } = await db.getUser(email);
@@ -11,8 +14,8 @@ app.post("/login", async (req, res) => {
                 success: false
             });
         }
-        let comaparePw = await compare(password, rows[0].password);
-        if (!comaparePw) {
+        let comparePw = await compare(password, rows[0].password);
+        if (!comparePw) {
             return res.json({
                 success: false
             });
@@ -26,7 +29,7 @@ app.post("/login", async (req, res) => {
     }
 });
 
-app.post("/registration", async (req, res) => {
+router.post("/registration", async (req, res) => {
     const { first, last, email, password } = req.body;
     const inputSize = Object.keys(req.body).length;
 
@@ -43,3 +46,5 @@ app.post("/registration", async (req, res) => {
         console.log("error on the post registration: ", err);
     }
 });
+
+module.exports = router;

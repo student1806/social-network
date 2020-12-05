@@ -15,7 +15,7 @@ export class OtherProfile extends React.Component {
         let otherId = this.props.match.params.id;
         // if (this.props.match.params.id != this.props.id) {
         try {
-            let { data } = await axios.get("/user.json/" + otherId);
+            let { data } = await axios.get("/api/user/" + otherId);
             let { otherUser } = data;
             //console.log("response. ", data);
 
