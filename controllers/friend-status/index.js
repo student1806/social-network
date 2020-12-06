@@ -1,7 +1,7 @@
 const express = require('express');
 const router =  express.Router();
-const db = require("../../utils/db");
-const {getFriendStatus, updateRequestFriendship} = require("../../update-friendship");
+const db = require("../../models/db");
+const {getFriendStatus, updateRequestFriendship} = require("./update-friendship");
 
 router.get("/friend-status/:otherId", async (req, res) => {
     const { otherId } = req.params;

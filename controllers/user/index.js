@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require("../../utils/db");
+const db = require("../../models/db");
 const router = express.Router();
 
 //name it with the json extention to avoid conflict with the client rendering page

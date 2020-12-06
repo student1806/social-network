@@ -1,11 +1,11 @@
 const express = require('express');
-const db = require("../../utils/db");
-const s3 = require("../../s3");
+const db = require("../../models/db");
+const s3 = require("../../config/s3");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
 
-const { s3Url } = require("../../config.json");
+const { s3Url } = require("../../config/config.json");
 const router = express.Router();
 
 const diskStorage = multer.diskStorage({

@@ -1,4 +1,4 @@
-const db = require("./utils/db");
+const db = require("../../models/db");
 
 module.exports.getFriendStatus = async (otherId, userId) => {
     try {

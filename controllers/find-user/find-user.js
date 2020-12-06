@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require("../../utils/db");
+const db = require("../../models/db");
 const router =  express.Router();
 
 router.get("/find-users/", async (req, res) => {

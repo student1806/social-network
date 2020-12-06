@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const compression = require("compression");
-const db = require("./utils/db");
-const secret = require("./secrets");
+const db = require("./models/db");
+const secret = require("./config/secrets.json");
 const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 

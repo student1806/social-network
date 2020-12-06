@@ -1,7 +1,7 @@
 //const app = require("./index");
 const express = require('express');
 const router =  express.Router();
-const db = require("../../utils/db");
+const db = require("../../models/db");
 const { hash, compare } = require("../../utils/bc");
 
 
