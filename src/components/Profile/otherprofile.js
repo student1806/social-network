@@ -1,9 +1,9 @@
 import React from "react";
-import axios from "./axios";
+import axios from "../../util/axios";
 import { ProfilePic } from "./profile-pic";
 import { bioCard } from "./profile";
 import { editor } from "./profile";
-import { FriendshipButton } from "./friendship-button";
+import { FriendshipButton } from "../Friendship-button/friendship-button";
 
 export class OtherProfile extends React.Component {
     constructor(props) {
@@ -32,9 +32,6 @@ export class OtherProfile extends React.Component {
         } catch (e) {
             console.log("Error on the getOther request; ", e);
         }
-        // } else {
-        //     this.props.history.push("/");
-        // }
     }
 
     render() {

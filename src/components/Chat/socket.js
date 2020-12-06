@@ -1,17 +1,12 @@
 import * as io from "socket.io-client";
 
-//These functions dont need axios requests
-import { chatMessages, chatMessage, onlineUsers } from "./actions";
+import { chatMessages, chatMessage, onlineUsers } from "../../service/actions";
 
 export let socket;
 
 export const init = store => {
     if (!socket) {
         socket = io.connect();
-
-        //any chat related can be done online user, private message,
-
-        //datat
         socket.on("onlineUsers", users => {
             store.dispatch(onlineUsers(users));
         });

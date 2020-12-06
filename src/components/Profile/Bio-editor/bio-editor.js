@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "./axios";
+import axios from "../../../util/axios";
 
 export class BioEditor extends React.Component {
     constructor(props) {

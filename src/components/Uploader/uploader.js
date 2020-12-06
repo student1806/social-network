@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "./axios";
+import axios from "../../util/axios";
 
 export default class UpLoader extends React.Component {
     constructor(props) {
@@ -27,10 +27,8 @@ export default class UpLoader extends React.Component {
                 console.log("Error in the post upload", err);
             });
     }
-    //onClick={this.props.toggleModal}
     render() {
         return (
-            // <div className="uploader-wrapper">
             <div className="upload-image">
                 <h2 className="up-img-tl">Change profile picture</h2>
                 <input
@@ -43,7 +41,6 @@ export default class UpLoader extends React.Component {
                 />
                 <label htmlFor="file">📂 Choose an image...</label>
             </div>
-            // </div>
         );
     }
 }

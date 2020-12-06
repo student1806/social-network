@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "./axios";
+import axios from "../../../util/axios";
 import { Link } from "react-router-dom";
 
 export default class Registration extends Component {

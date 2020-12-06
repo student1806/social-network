@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "./axios";
+import axios from "../../../util/axios";
 import { render, fireEvent } from "@testing-library/react";
 import { JestEnvironment } from "@jest/environment";
 import { BioEditor } from "./bio-editor";

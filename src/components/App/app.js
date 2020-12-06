@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import axios from "./axios";
-import UpLoader from "./uploader";
-import { Profile } from "./profile";
-import Header from "./header";
+import axios from "../../util/axios";
+import UpLoader from "../Uploader/uploader";
+import { Profile } from "../Profile/profile";
+import Header from "../Header/header";
 import { BrowserRouter, Route } from "react-router-dom";
-import { OtherProfile } from "./otherprofile";
-import { FindPeople } from "./users";
-import { FriendsList } from "./friends";
-import { Chat } from "./chat";
+import { OtherProfile } from "../Profile/otherprofile";
+import { FindPeople } from "../FindPeople/FindPeople";
+import { FriendsList } from "../Friends/friends";
+import { Chat } from "../Chat/chat";
 
 export default class App extends Component {
     constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Registration from "./registration";
-import Login from "./login";
+import Registration from "./Authentication/registration";
+import Login from "./Authentication/login";
 import { HashRouter, Route } from "react-router-dom";
 
 export default class Welcome extends Component {

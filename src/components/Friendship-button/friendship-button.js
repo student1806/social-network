@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "./axios";
+import axios from "../../util/axios";
 
 export function FriendshipButton({ otherId }) {
     const [buttonText, setButtonText] = useState();

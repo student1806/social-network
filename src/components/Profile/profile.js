@@ -1,6 +1,6 @@
 import React from "react";
 import { ProfilePic } from "./profile-pic";
-import { BioEditor } from "./bio-editor";
+import { BioEditor } from "./Bio-editor/bio-editor";
 
 export let bioCard = {
     height: 400,

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { ProfileChat, ProfileOnline } from "./profile-card";
+import { ProfileChat, ProfileOnline } from "../Profile/profile-card";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
 

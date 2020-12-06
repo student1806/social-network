@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import {
     receiveFriendsWannabes,
     unfriend,
     acceptFriendRequest
-} from "./actions";
-import { ProfilePic } from "./profile-pic";
-import { ProfileCard } from "./profile-card";
+} from "../../service/actions";
+import { ProfileCard } from "../Profile/profile-card";
 
 export function FriendsList() {
     const dispatch = useDispatch();

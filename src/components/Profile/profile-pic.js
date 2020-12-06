@@ -11,8 +11,6 @@ export function ProfilePic({
     return (
         <>
             <img className={classPic} src={imgurl} onClick={toggleModal} />
-
-            {/* <p>{firstname}</p> */}
         </>
     );
 }

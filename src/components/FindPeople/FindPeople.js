@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "./axios";
-import { ProfileCard } from "./profile-card";
+import axios from "../../util/axios";
+import { ProfileCard } from "../Profile/profile-card";
 
 export function FindPeople() {
     const [users, setUsers] = useState([]);
