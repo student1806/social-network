@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "../../../util/axios";
 import { render, fireEvent } from "@testing-library/react";
-import { JestEnvironment } from "@jest/environment";
 import { BioEditor } from "./bio-editor";
 
 test("'Add your bio' should display if no bio is available", () => {
